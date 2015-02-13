@@ -1,0 +1,4 @@
+"start_height;end_height;interval;injection_node;injection_timing"
+"100;200;30;i69;20"
+"200;300;50;i69;20"
+"-300;-400;-30;i69;30"

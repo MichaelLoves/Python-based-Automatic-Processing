@@ -5,31 +5,40 @@
 .OPTION PROBE                    $ Nanosim requires this line
 .PROBE V(*) I(I69) I(I70) I(I71) I(I72) I(I73)      $ Nanosim requires to specify output node
 
+
 .TEMP = 27                    
-.param mvdd = 0.6 
-.TRAN 1p simtime sweep currentdelay72 10n 15n 0.1n
-.param currentheight = 10e-6   ***100e-6 = 0.1mA
+.param mvdd = 1.8
+.TRAN 1p simtime sweep currentheight 2000e-6 4000e-6 500e-6
+.param currentheight = 0e-6   ***100e-6 = 0.1mA  
+
+*** 测量输出信号的最大电压值
+.MEASURE TRAN n_and_3_maxvol MAX V(n_and_3) FROM=0n TO=simtime
+.MEASURE TRAN n_nand_3_maxvol MAX V(n_nand_3) FROM=0n TO=simtime
+.MEASURE TRAN p_and_3_maxvol MAX V(p_and_3) FROM=0n TO=simtime
+.MEASURE TRAN p_nand_3_maxvol MAX V(p_nand_3) FROM=0n TO=simtime
+.MEASURE TRAN cd_3_maxvol MAX V(cd_3) FROM=0n TO=simtime
+
 
 VVDD  VDD  0 DC mvdd               
 VGND  GND  0 DC 0                  
 
-.param simtime = 200n
+.param simtime = 100n
 .param pw1 = simtime *2n  *it was 2n
-.param pw2 = simtime
-.param period1 = simtime *4*pw1   it was 6n
-.param period2 = simtime
+.param pw2 = simtime *2n
+.param period1 = 4*pw1   *it was 6n
+.param period2 = 4*pw1
 .param latency1 = 5n
-.param latency2 = 5n *latency1+2*pw1
+.param latency2 = 7n *latency1+2*pw1
 .param latency3 = simtime
 .param latency4 = simtime
 
 
+*** 定义入力信号
 VRESET RESET 0 PULSE(0 mvdd 0n 0n 0n latency1 simtime)
 
 VA A_n 0 PULSE(0 mvdd latency1 0n 0n pw1 period1)
 VB B_n 0 PULSE(0 mvdd latency1 0n 0n pw1 period1)
 VC C_n 0 PULSE(0 mvdd latency1 0n 0n pw1 period1)
-
 
 VA_p A_p 0 PULSE(0 mvdd latency2 0n 0n pw1 period1)
 VB_p B_p 0 PULSE(0 mvdd latency2 0n 0n pw1 period1)
@@ -137,36 +146,36 @@ m110 net9 cd_n_1 vdd vdd P L=180e-9 W=4e-6 AD=8.00p AS=8.00p PD=12.00u PS=12.00u
 m109 net151 cd_2 vdd vdd P L=180e-9 W=4e-6 AD=8.00p AS=8.00p PD=12.00u PS=12.00u 
 m108 net9 n_nand_1 vdd vdd P L=180e-9 W=1e-6 AD=2.00p AS=2.00p PD=6.00u PS=6.00u 
 m107 net151 p_nand_1 vdd vdd P L=180e-9 W=1e-6 AD=2.00p AS=2.00p PD=6.00u PS=6.00u 
-m235 net132 n_nand_2 net282 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m234 net283 n_nand_2 net115 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m233 net282 n_nand_2 net283 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m97 net261 p_nand_2 net295 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m92 net295 p_nand_2 net296 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m89 net296 p_nand_2 net116 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m235 net132 n_and_2 net282 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m234 net283 n_and_2 net115 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m233 net282 n_and_2 net283 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m97 net261 p_and_2 net295 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m92 net295 p_and_2 net296 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m89 net296 p_and_2 net116 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
 m232 net115 cd_n_3 gnd gnd N L=180e-9 W=4e-6 AD=8.00p AS=8.00p PD=12.00u PS=12.00u 
 m88 net116 cd_3 gnd gnd N L=180e-9 W=4e-6 AD=8.00p AS=8.00p PD=12.00u PS=12.00u 
-m229 net284 n_nand_2 net114 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m228 net105 n_and_2 net284 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m98 net239 p_and_2 net297 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m93 net297 p_nand_2 net117 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m90 net117 p_nand_2 net116 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m227 net114 n_nand_2 net115 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m226 net105 n_and_2 net113 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m225 net239 p_and_2 net112 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m224 net113 n_and_2 net114 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m94 net112 p_and_2 net117 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m223 net105 n_nand_2 net113 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m222 net239 p_nand_2 net112 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m221 net105 n_and_2 net246 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m220 net246 n_and_2 net109 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m219 net239 p_and_2 net245 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m95 net245 p_and_2 net247 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
-m218 net109 n_and_2 net115 gnd N L=180e-9 W=5e-6 AD=10.00p AS=10.00p PD=14.00u PS=14.00u 
-m91 net247 p_and_2 net116 gnd N L=180e-9 W=5e-6 AD=10.00p AS=10.00p PD=14.00u PS=14.00u 
-m217 net105 n_nand_2 net246 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m216 net246 n_nand_2 net109 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m215 net239 p_nand_2 net245 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
-m96 net245 p_nand_2 net247 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m229 net284 n_and_2 net114 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m228 net105 n_nand_2 net284 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m98 net239 p_nand_2 net297 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m93 net297 p_and_2 net117 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m90 net117 p_and_2 net116 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m227 net114 n_and_2 net115 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m226 net105 n_nand_2 net113 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m225 net239 p_nand_2 net112 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m224 net113 n_nand_2 net114 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m94 net112 p_nand_2 net117 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m223 net105 n_and_2 net113 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m222 net239 p_and_2 net112 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m221 net105 n_nand_2 net246 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m220 net246 n_nand_2 net109 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m219 net239 p_nand_2 net245 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m95 net245 p_nand_2 net247 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
+m218 net109 n_nand_2 net115 gnd N L=180e-9 W=5e-6 AD=10.00p AS=10.00p PD=14.00u PS=14.00u 
+m91 net247 p_nand_2 net116 gnd N L=180e-9 W=5e-6 AD=10.00p AS=10.00p PD=14.00u PS=14.00u 
+m217 net105 n_and_2 net246 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m216 net246 n_and_2 net109 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m215 net239 p_and_2 net245 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
+m96 net245 p_and_2 net247 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
 m208 net299 p_and_1 net68 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
 m207 net288 n_and_1 net67 gnd N L=180e-9 W=3e-6 AD=6.00p AS=6.00p PD=10.00u PS=10.00u 
 m206 net287 n_and_1 net288 gnd N L=180e-9 W=2e-6 AD=4.00p AS=4.00p PD=8.00u PS=8.00u 
@@ -247,11 +256,12 @@ xi46 gnd p_nand_1 net290 vdd inv2
 xi45 gnd p_and_1 net291 vdd inv2
 
 
+
 *** pulse i1 i2 delay rise fall pw period
-*** I69 N_and
-*** I70 N_nand
-*** I71 P_and
-*** I72 P_nand
+*** I69 N_and_3
+*** I70 N_nand_3
+*** I71 P_and_3
+*** I72 P_nand_3
 *** I73 CD_3
 
 .param currentduration = 0.1e-9  ***0.1ns
@@ -260,7 +270,7 @@ xi45 gnd p_and_1 net291 vdd inv2
 .param currentdelay72 = simtime   ***P_nand_3
 .param currentdelay71 = simtime   ***P_and_3
 .param currentdelay70 = simtime   ***N_nand_3
-.param currentdelay69 = simtime   ***N_and_3
+.param currentdelay69 = 62.5n   ***N_and_3
 
 i73 gnd net278 PULSE 0 currentheight currentdelay73 0 0 currentduration simtime
 i72 gnd net239 PULSE 0 currentheight currentdelay72 0 0 currentduration simtime

@@ -5,21 +5,23 @@
 .OPTION PROBE                    $ Nanosim requires this line
 .PROBE V(*) I(I69) I(I70) I(I71) I(I72) I(I73)      $ Nanosim requires to specify output node
 
+*.MEASURE TRAN maxval MAX V(n_nand_3) FROM=10n TO=20n  
+
 .TEMP = 27                    
-.param mvdd = 0.6 
-.TRAN 1p simtime sweep currentdelay72 10n 15n 0.1n
-.param currentheight = 10e-6   ***100e-6 = 0.1mA
+.param mvdd = 1.8
+.TRAN 1p simtime sweep currentheight 300 400 30
+.param currentheight = -000e-6   ***100e-6 = 0.1mA               
 
 VVDD  VDD  0 DC mvdd               
 VGND  GND  0 DC 0                  
 
 .param simtime = 200n
-.param pw1 = simtime *2n  *it was 2n
-.param pw2 = simtime
-.param period1 = simtime *4*pw1   it was 6n
-.param period2 = simtime
+.param pw1 = 2n  *it was 2n
+.param pw2 = 2n
+.param period1 = 4*pw1   *it was 6n
+.param period2 = 4*pw1
 .param latency1 = 5n
-.param latency2 = 5n *latency1+2*pw1
+.param latency2 = latency1+2*pw1
 .param latency3 = simtime
 .param latency4 = simtime
 
@@ -258,7 +260,7 @@ xi45 gnd p_and_1 net291 vdd inv2
 
 .param currentdelay73 = simtime   ***CD_3
 .param currentdelay72 = simtime   ***P_nand_3
-.param currentdelay71 = simtime   ***P_and_3
+.param currentdelay71 = simtime   ***P_and_3   
 .param currentdelay70 = simtime   ***N_nand_3
 .param currentdelay69 = simtime   ***N_and_3
 
