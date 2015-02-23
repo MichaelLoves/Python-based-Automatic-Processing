@@ -38,10 +38,12 @@ temp_file = sp_file.readlines()
 #找出 netlist_sim 文件中 ***netlist_sim*** 部分所在的两行的行数
 #查出一个元素在 list 中的所有位置
 def find_all_index(array, item):
-	return [i for i, a in enumerate(array) if a == item]
+	return [index for index, element in enumerate(array) if element == item]
+
 for line in temp_file:
 	if 'netlist_sim' in line:
 		netlist_sim_line = line
+
 start_line, end_line = find_all_index(temp_file, netlist_sim_line)
 
 #替换两行 ***netlist_sim*** 中的部分

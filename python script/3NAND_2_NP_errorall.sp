@@ -8,8 +8,8 @@
 
 .TEMP = 27                    
 .param mvdd = 1.8
-.TRAN 1p simtime sweep currentheight 2000e-6 4000e-6 500e-6
-.param currentheight = 0e-6   ***100e-6 = 0.1mA  
+.TRAN 1p simtime sweep currentheight 200e-6 300e-6 50e-6
+.param currentheight = 10e-6   ***100e-6 = 0.1mA  
 
 *** 测量输出信号的最大电压值
 .MEASURE TRAN n_and_3_maxvol MAX V(n_and_3) FROM=0n TO=simtime
@@ -270,7 +270,7 @@ xi45 gnd p_and_1 net291 vdd inv2
 .param currentdelay72 = simtime   ***P_nand_3
 .param currentdelay71 = simtime   ***P_and_3
 .param currentdelay70 = simtime   ***N_nand_3
-.param currentdelay69 = 62.5n   ***N_and_3
+.param currentdelay69 = 20   ***N_and_3
 
 i73 gnd net278 PULSE 0 currentheight currentdelay73 0 0 currentduration simtime
 i72 gnd net239 PULSE 0 currentheight currentdelay72 0 0 currentduration simtime

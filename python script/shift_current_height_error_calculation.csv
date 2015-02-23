@@ -1,0 +1,2 @@
+start height,end height,interval,injection node,output node,injection timing,error rate,min vol
+100,400,200,i69,n_and_3,62.5n,1,-8.4406e-02

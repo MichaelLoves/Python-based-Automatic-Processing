@@ -60,7 +60,6 @@ def shift_timing(start_timing, end_timing, current_height, injection_node, outpu
 
 	#读取.lis文件统计错误率
 	file = open('../waveform/shift_timing_result' + str(sim_time) + '.lis', 'r')
-	lis_file = file.readlines()
 
 	#sim_times : 进行模拟的总次数    error_times : 出现错误的总次数
 	#出现错误的标准：利用Hspice自带的.MEASURE命令对于特定端子进行检测
@@ -88,15 +87,15 @@ def shift_timing(start_timing, end_timing, current_height, injection_node, outpu
 		#如果是第一次进行模拟， 创建txt文件， 并在第一行表明数据名称
 		output_csv_file = open('shift_timing_error_calculation.csv', 'wb')
 		csv_writer = csv.writer(output_csv_file)
-		csv_writer.writerow(['start timing', 'end timing', 'current height', 'injection node', 'output node', 'error rate', 'min vol'])
-		csv_writer.writerow([start_timing, end_timing, current_height, injection_node, output_node, error_rate, signal_min_voltage])
+		csv_writer.writerow(['start timing', 'end timing', 'current height', 'injection node', 'error rate', 'min vol'])
+		csv_writer.writerow([start_timing, end_timing, current_height, injection_node, error_rate, signal_min_voltage])
 		
 
 	else:
 		#如果是第二次之后的模拟, 进行追加填写
 		output_csv_file = open('shift_timing_error_calculation.csv', 'a+')
 		csv_writer = csv.writer(output_csv_file)
-		csv_writer.writerow([start_timing, end_timing, current_height, injection_node, output_node, error_rate, signal_min_voltage])
+		csv_writer.writerow([start_timing, end_timing, current_height, injection_node, error_rate, signal_min_voltage])
 	
 	output_csv_file.close()
 	#'''
@@ -175,14 +174,14 @@ def shift_current_height(start_height, end_height, interval, injection_node, inj
 		#如果是第一次进行模拟， 创建CSV文件， 并在第一行标明数据名称
 		output_csv_file = open('shift_current_height_error_calculation.csv', 'wb')
 		csv_writer = csv.writer(output_csv_file)
-		csv_writer.writerow(['start height', 'end height', 'interval', 'injection node', 'output node', 'injection timing', 'error rate', 'min vol'])
-		csv_writer.writerow([start_height, end_height, interval, injection_node, output_node, injection_timing, error_rate, signal_min_voltage])
+		csv_writer.writerow(['start height', 'end height', 'interval', 'injection node', 'injection timing', 'error rate', 'min vol'])
+		csv_writer.writerow([start_height, end_height, interval, injection_node, injection_timing, error_rate, signal_min_voltage])
 
 	else:
 		#如果是第二次之后的模拟, 进行追加填写
 		output_csv_file = open('shift_current_height_error_calculation.csv', 'a+')
 		csv_writer = csv.writer(output_csv_file)
-		csv_writer.writerow([start_height, end_height, interval, injection_node, output_node, injection_timing, error_rate, signal_min_voltage])
+		csv_writer.writerow([start_height, end_height, interval, injection_node, injection_timing, error_rate, signal_min_voltage])
 
 	output_csv_file.close()
 	#'''
