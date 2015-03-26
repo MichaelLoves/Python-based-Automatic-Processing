@@ -1,0 +1,1808 @@
+ ****** HSPICE -- F-2011.09-SP2 64-BIT (Feb 27 2012) linux ******               
+  Copyright (C) 2011 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: 3NAND_2_NP_errorall.sp                                            
+  Command line options: -hpp -mt 4 -i 3NAND_2_NP_errorall.sp -o ./waveform/test.lis
+ lic: No 'setenv LM_LICENSE_FILE' in current environment' 
+ lic:  
+ lic: FLEXlm: v10.8 
+ lic: USER:   sai                  HOSTNAME: linux19 
+ lic: HOSTID: 60a44cb1708a         PID:      7741 
+ lic: Using FLEXlm license file: 
+ lic: 1700@vdec-cad1 
+ lic: Checkout 1 hspice 
+ lic: License/Maintenance for hspice will expire on 31-mar-2015/2013.12 
+ lic: 27(in_use)/180(total) FLOATING license(s) on SERVER vdec-cad1 
+ lic:   
+ Init: read install configuration file: /mnt/rose/cad/linux/synopsys/hspice.latest/hspice/meta.cfg
+ 
+ ****** Advanced Analog Library - F-2011.09-SP2 (Feb 27 2012) ****** 
+  **warning** (3NAND_2_NP_errorall.sp:118) Global net name, "gnd", in subckt pin list. The pin will be connected to the local net. Recommend to not use global net names in subckt pin lists.
+1****** HSPICE -- F-2011.09-SP2 64-BIT (Feb 27 2012) linux ******               
+ ******  
+ .title 3nand_2_np_errorall
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xi63.                           inv                1.00 
+        2 xi56.                           inv                1.00 
+        3 xi47.                           inv                1.00 
+        4 xi64.                           inv_with_reset     1.00 
+        5 xi62.                           inv_with_reset     1.00 
+        6 xi61.                           inv_with_reset     1.00 
+        7 xi60.                           inv_with_reset     1.00 
+        8 xi59.                           inv_with_reset     1.00 
+        9 xi58.                           inv_with_reset     1.00 
+       10 xi57.                           inv_with_reset     1.00 
+       11 xi52.                           inv_with_reset     1.00 
+       12 xi49.                           inv_with_reset     1.00 
+       13 xi51.                           inv_with_reset     1.00 
+       14 xi53.                           inv_with_reset     1.00 
+       15 xi50.                           inv_with_reset     1.00 
+       16 xi48.                           inv_with_reset     1.00 
+       17 xi44.                           inv_with_reset     1.00 
+       18 xi43.                           inv_with_reset     1.00 
+       19 xi42.                           inv_with_reset     1.00 
+       20 xi41.                           inv_with_reset     1.00 
+       21 xi40.                           inv_with_reset     1.00 
+       22 xi24.                           inv2               1.00 
+       23 xi1.                            inv2               1.00 
+       24 xi55.                           inv2               1.00 
+       25 xi54.                           inv2               1.00 
+       26 xi46.                           inv2               1.00 
+       27 xi45.                           inv2               1.00 
+  **warning** (3NAND_2_NP_errorall.sp:68) Both nodes of element vgnd are connected together; Line ignored.
+  **info** (3NAND_2_NP_errorall.sp:82) DC voltage reset to initial transient source value              in source        0:vreset              new dc=  0.0000D+00
+  **warning** (3NAND_2_NP_errorall.sp:82) pulse vreset period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:84) pulse va period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:85) pulse vb period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:86) pulse vc period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:88) pulse va_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:89) pulse vb_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:90) pulse vc_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:92) pulse vna period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:93) pulse vnb period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:94) pulse vnc period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:96) pulse vna_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:97) pulse vnb_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:98) pulse vnc_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:321) pulse i73 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:322) pulse i72 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:323) pulse i71 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:324) pulse i70 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:325) pulse i69 period too small, reset to   0.2000000
+ ***************************************************************************
+ ***        model parameters  model name:   0:p.2      model type:pmos   ***
+ ***************************************************************************
+
+   *** general parameters ***
+    deriv=   0.           
+
+   ***  level 53  model parameters  ***
+
+      hspver=    2006.03               level=         53         
+     version=        3.2            paramchk=          0         
+      apwarn=          1                lite=          0         
+      vgslim=          0             binUnit=          1         
+      capMod=          3               xpart=          0         
+      mobMod=          3              nqsMod=          0         
+      stiMod=          0                 elm=          5         
+    sfvtflag=          0                 tox=    3.2e-09 meter   
+          xj=    1.5e-07 meter       binflag=          0         
+        lmin=    1.8e-07 meter          lmax=      5e-07 meter   
+        wmin=      1e-06 meter          wmax=      1e-05 meter   
+        lref=          0 meter          wref=          0 meter   
+        lint=      1e-09 meter          wint=     -2e-08 meter   
+       lmult=          1               wmult=          1         
+          ll=          0                 lln=          1         
+          lw=          0                 lwn=          0         
+         lwl=          0                  wl=    5.5e-15         
+         wln=       0.99                  ww=      1e-15         
+         wwn=      1e-06                 wwl=          0         
+         dwg=   9.45e-09 m/V             dwb=    2.5e-08 m/V^1/2 
+          xl=          0                  xw=          0         
+          a0=    -0.3739                 ags=      1e-12 V^-1    
+          b0=  8.438e-05 meter            b1=  9.051e-05 meter   
+        keta=     -0.064 V^-1           voff=   -0.07968 V       
+       ngate=          0 cm^-3           vbx=          0 V       
+         vbm=         -3 V                xt=   1.55e-07 meter   
+        vth0=    -0.3922 V               nch=    1.7e+17 cm^-3   
+        nsub=      6e+16 cm^-3           nlx=  8.505e-08 meter   
+      gamma1=          0 V^-1/2       gamma2=          0 V^-1/2  
+          k1=     0.5328 V^1/2            k2=   -0.07631         
+          k3=     -8.953                 k3b=      6.192 V^-1    
+          w0=      1e-09 meter          dvt0=      9.935         
+        dvt1=      1.305                dvt2= -4.441e-16 V^-1    
+       dvt0w=    0.02761 meter^-1      dvt1w=  2.495e-09 meter^-1
+       dvt2w=  -2.22e-17 V^-1           dsub=     0.7104         
+        eta0=     0.1499                etab=       -0.1 V^-1    
+          u0=      60.03 cm^2/V/sec         ua=  5.923e-10 m/V     
+          ub=  1.281e-19 (m/V)^2          uc=   -0.04374 V^-1    
+        vsat=      1e+06 m/sec            a1=      0.001 v^-1    
+          a2=    0.06757               delta=    0.01877 V       
+        rdsw=        100 ohm-um         prwg=    -0.7655 V^-1    
+        prwb=          0 V^-1/2           wr=          1         
+        pclm=      2.235             pdiblc1=       1.65         
+     pdiblc2=    0.02496             pdiblcb=         -2 V^-1    
+      pscbe1=  9.852e+08 V/m          pscbe2=   4.01e-09 V/m     
+       drout=      1.675                pvag=         10         
+     nfactor=          2                cdsc=      0.001 f/m^2   
+       cdscb=    -0.0001 f/V/m^2       cdscd= -9.945e-05 f/V/m^2 
+         cit=          0 f/m^2        alpha0=  7.001e-09 m/V     
+       beta0=      15.32 V               dlc=      1e-09 meter   
+         dwc=     -2e-08 meter           clc=      6e-07 meter   
+         cle=        0.6                cgso= 1.0791e-11 f/m     
+        cgdo= 1.0791e-11 f/m            cgbo=-4.31642e-10 f/m     
+        cgsl=          0 f/m            cgdl=          0 f/m     
+      ckappa=        0.6                  cf=1.07911e-10 f/m     
+        acde=          1 m/V            moin=         15 V^1/2   
+        toxm=    3.2e-09 m            dtoxcv=          0 m       
+         vfb (not used)                alpha1=          0 1/V     
+        ijth=          0 A              noff=          1         
+      voffcv=          0                 tcj=    8.7e-05 1/K     
+       tcjsw=   5.71e-11 1/K          tcjswg=          0 1/K     
+         tpb=      0.001 V/K           tpbsw=      0.001 V/K     
+      tpbswg=          0 V/K             llc=          0         
+         lwc=          0                lwlc=          0         
+         wlc=    5.5e-15                 wwc=      1e-15         
+        wwlc=          0                tnom=     298.15 K       
+         kt1=    -0.3309 V              kt1l=  2.939e-09         
+         kt2=          0                 ute=      -1.42         
+         ua1=      1e-18 m/V             ub1= -1.351e-18 (m/V)^2 
+         uc1=    -0.2805 m/V^2            at=          1 m/s     
+         prt=          0         
+         using Berkeley noise model       noiMod=          1         
+        noia=    9.9e+18                noib=       2400         
+        noic=    1.4e-12                  em=    4.1e+07         
+          ef=          1                  af=          1         
+          kf=          0              gdsnoi=-1.23457e-29         
+         using Hspice diodes            using ACM 
+         acm=         2                 hdif=   6.4e-07 meter    
+        ldif=         0 meter             js=     8e-06 amp/m^2  
+         jsw=         0 amp/m            xti=         0          
+           n=         1                   cj=   0.00179 f/m^2    
+          mj=    0.4529                   pb=    0.8526 V        
+        cjsw=  1.62e-10 f/m             mjsw=    0.3809          
+         php=    0.8526 V               pbsw (not used)           
+      cjgate=  1.62e-10 f/m            cjswg (not used)           
+       mjswg (not used)                 pbswg (not used)           
+         pwr= -4.441e-15         
+ ***************************************************************************
+ ***        model parameters  model name:   0:n.2      model type:nmos   ***
+ ***************************************************************************
+
+   *** general parameters ***
+    deriv=   0.           
+
+   ***  level 53  model parameters  ***
+
+      hspver=    2006.03               level=         53         
+     version=        3.2            paramchk=          0         
+      apwarn=          1                lite=          0         
+      vgslim=          0             binUnit=          1         
+      capMod=          3               xpart=          0         
+      mobMod=          3              nqsMod=          0         
+      stiMod=          0                 elm=          5         
+    sfvtflag=          0                 tox=    3.2e-09 meter   
+          xj=    1.5e-07 meter       binflag=          0         
+        lmin=    1.8e-07 meter          lmax=      5e-07 meter   
+        wmin=      1e-06 meter          wmax=   1.01e-05 meter   
+        lref=          0 meter          wref=          0 meter   
+        lint=  2.378e-08 meter          wint=  4.612e-09 meter   
+       lmult=          1               wmult=          1         
+          ll=          0                 lln=          1         
+          lw=          0                 lwn=          0         
+         lwl=          0                  wl=      8e-16         
+         wln=       1.12                  ww=     -1e-15         
+         wwn=          1                 wwl=          0         
+         dwg= -3.682e-08 m/V             dwb=          0 m/V^1/2 
+          xl=          0                  xw=          0         
+          a0=      1.766                 ags=     0.7566 V^-1    
+          b0= -8.838e-06 meter            b1=   2.43e-05 meter   
+        keta=     0.0159 V^-1           voff=    -0.1662 V       
+       ngate=          0 cm^-3           vbx=          0 V       
+         vbm=         -3 V                xt=   1.55e-07 meter   
+        vth0=     0.4624 V               nch=    1.7e+17 cm^-3   
+        nsub=      6e+16 cm^-3           nlx=  8.967e-08 meter   
+      gamma1=          0 V^-1/2       gamma2=          0 V^-1/2  
+          k1=     0.4128 V^1/2            k2=    -0.0161         
+          k3=      8.095                 k3b=      5.101 V^-1    
+          w0=      1e-09 meter          dvt0=       4.26         
+        dvt1=      1.248                dvt2=       -0.1 V^-1    
+       dvt0w=      15440 meter^-1      dvt1w=  6.973e+07 meter^-1
+       dvt2w=          0 V^-1           dsub=     0.7451         
+        eta0=    0.01787                etab=    -0.0619 V^-1    
+          u0=      276.8 cm^2/V/sec         ua= -1.473e-09 m/V     
+          ub=  2.642e-18 (m/V)^2          uc=     0.2385 V^-1    
+        vsat=      92170 m/sec            a1=  0.0005758 v^-1    
+          a2=     0.6551               delta=  1.444e-15 V       
+        rdsw=      290.9 ohm-um         prwg=  -0.009464 V^-1    
+        prwb=          0 V^-1/2           wr=      1.038         
+        pclm=      1.844             pdiblc1=       0.43         
+     pdiblc2=  0.0008522             pdiblcb= -4.441e-16 V^-1    
+      pscbe1=  3.792e+07 V/m          pscbe2=          0 V/m     
+       drout=     0.9994                pvag=     0.2047         
+     nfactor=      1.172                cdsc=   0.002468 f/m^2   
+       cdscb=  -0.001006 f/V/m^2       cdscd=    -0.0001 f/V/m^2 
+         cit=          0 f/m^2        alpha0=  3.609e-06 m/V     
+       beta0=      16.53 V               dlc=  2.378e-08 meter   
+         dwc=  4.612e-09 meter           clc=      1e-07 meter   
+         cle=        0.6                cgso=2.56611e-10 f/m     
+        cgdo=2.56611e-10 f/m            cgbo=9.95366e-11 f/m     
+        cgsl=          0 f/m            cgdl=          0 f/m     
+      ckappa=        0.6                  cf=1.07911e-10 f/m     
+        acde=          1 m/V            moin=         15 V^1/2   
+        toxm=    3.2e-09 m            dtoxcv=          0 m       
+         vfb (not used)                alpha1=          0 1/V     
+        ijth=          0 A              noff=          1         
+      voffcv=          0                 tcj=      0.001 1/K     
+       tcjsw=  1.444e-15 1/K          tcjswg=          0 1/K     
+         tpb=  2.175e-09 V/K           tpbsw=      1e-15 V/K     
+      tpbswg=          0 V/K             llc=          0         
+         lwc=          0                lwlc=          0         
+         wlc=      8e-16                 wwc=     -1e-15         
+        wwlc=          0                tnom=     298.15 K       
+         kt1=     -0.248 V              kt1l=  1.579e-09         
+         kt2=  4.441e-16                 ute=     -2.297         
+         ua1=  1.713e-09 m/V             ub1= -3.511e-18 (m/V)^2 
+         uc1=    -0.1888 m/V^2            at=      50760 m/s     
+         prt=          0         
+         using Berkeley noise model       noiMod=          1         
+        noia=      1e+20                noib=      50000         
+        noic=   -1.4e-12                  em=    4.1e+07         
+          ef=          1                  af=          1         
+          kf=          0              gdsnoi=-1.23457e-29         
+         using Hspice diodes            using ACM 
+         acm=         2                 hdif=   6.4e-07 meter    
+        ldif=         0 meter             js=     6e-06 amp/m^2  
+         jsw=         0 amp/m            xti=         0          
+           n=         1                   cj= 0.0009478 f/m^2    
+          mj=    0.2932                   pb=    0.7758 V        
+        cjsw= 2.968e-10 f/m             mjsw=    0.4036          
+         php=    0.7758 V               pbsw (not used)           
+      cjgate= 2.968e-10 f/m            cjswg (not used)           
+       mjswg (not used)                 pbswg (not used)           
+ 
+
+ Warning: Pscbe2 = 0 is not positive.
+ Model:    0:n.2
+ W = 2e-06, L = 1.8e-07
+
+  
+      
+ **info** set option symb=1 internally to help for convergence.
+ *****************************************************************
+ ******  option summary
+ ******
+ runlvl  = 3         bypass  = 2         
+  Opening plot unit= 15
+ file=./waveform/test.pa0                                                      
+
+  **warning** (3NAND_2_NP_errorall.sp:82) pulse vreset period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:84) pulse va period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:85) pulse vb period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:86) pulse vc period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:88) pulse va_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:89) pulse vb_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:90) pulse vc_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:92) pulse vna period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:93) pulse vnb period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:94) pulse vnc period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:96) pulse vna_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:97) pulse vnb_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:98) pulse vnc_p period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:321) pulse i73 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:322) pulse i72 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:323) pulse i71 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:324) pulse i70 period too small, reset to   0.2000000
+  **warning** (3NAND_2_NP_errorall.sp:325) pulse i69 period too small, reset to   0.2000000
+1****** HSPICE -- F-2011.09-SP2 64-BIT (Feb 27 2012) linux ******               
+ ******  
+ .title 3nand_2_np_errorall
+
+  ******  operating point information tnom=  25.000 temp=  27.000 *****
+ ***** operating point status is all       simulation time is     0.     
+     node    =voltage       node    =voltage       node    =voltage
+
+ + 0:a_n     =   0.       0:a_p     =   0.       0:b_n     =   0.     
+ + 0:b_p     =   0.       0:c_n     =   0.       0:c_p     =   0.     
+ + 0:cd_1    =   1.8000   0:cd_2    =   3.2772n  0:cd_3    =   1.8000 
+ + 0:cd_n_1  =   1.8000   0:cd_n_2  =   3.2772n  0:cd_n_3  =   3.2772n
+ + 0:n_and_1 =   3.2772n  0:n_and_2 =   3.2772n  0:n_and_3 =   3.2772n
+ + 0:n_nand_1=   3.2772n  0:n_nand_2=   3.2772n  0:n_nand_3=   3.2772n
+ + 0:na_n    =   0.       0:na_p    =   0.       0:nb_n    =   0.     
+ + 0:nb_p    =   0.       0:nc_n    =   0.       0:nc_p    =   0.     
+ + 0:net105  =   1.8000   0:net109  =  53.2916m  0:net112  = 468.2144m
+ + 0:net113  = 594.7863m  0:net114  =  86.9841m  0:net115  =  26.2646m
+ + 0:net116  = 991.2604p  0:net117  =  35.4747m  0:net13   =  17.9253m
+ + 0:net132  =   1.8000   0:net151  =   1.8000   0:net157  = 389.0861m
+ + 0:net158  = 204.2838m  0:net159  =  53.2916m  0:net16   = 594.7863m
+ + 0:net17   = 468.2145m  0:net173  =   1.8000   0:net18   =  35.4747m
+ + 0:net19   = 991.2603p  0:net190  =  16.6960n  0:net195  =   1.8000 
+ + 0:net20   =  26.2646m  0:net201  = 204.2838m  0:net202  = 389.0861m
+ + 0:net203  =  17.9253m  0:net21   =  86.9841m  0:net217  =   1.8000 
+ + 0:net234  =   1.8000   0:net239  =   1.8000   0:net245  = 204.2838m
+ + 0:net246  = 389.0861m  0:net247  =  17.9253m  0:net261  =   1.8000 
+ + 0:net278  =  16.6960n  0:net280  =   1.8000   0:net281  =   1.8000 
+ + 0:net282  = 393.4493m  0:net283  =  47.7672m  0:net284  = 456.5492m
+ + 0:net285  =   1.8000   0:net286  =   1.8000   0:net287  = 393.4493m
+ + 0:net288  =  47.7672m  0:net289  = 456.5492m  0:net290  =   1.8000 
+ + 0:net291  =   1.8000   0:net292  = 234.4559m  0:net293  =  14.5402m
+ + 0:net294  = 351.4251m  0:net295  = 234.4559m  0:net296  =  14.5402m
+ + 0:net297  = 351.4250m  0:net298  = 234.4559m  0:net299  =  14.5402m
+ + 0:net300  = 351.4250m  0:net301  = 393.4493m  0:net302  =  47.7672m
+ + 0:net303  = 456.5492m  0:net36   =   1.8000   0:net57   =   1.8000 
+ + 0:net61   =  53.2916m  0:net64   = 468.2144m  0:net65   = 594.7863m
+ + 0:net66   =  86.9841m  0:net67   =  26.2646m  0:net68   = 991.2603p
+ + 0:net69   =  35.4747m  0:net84   =   1.8000   0:net9    =   1.8000 
+ + 0:p_and_1 =   3.2772n  0:p_and_2 =   3.2772n  0:p_and_3 =   3.2772n
+ + 0:p_nand_1=   3.2772n  0:p_nand_2=   3.2772n  0:p_nand_3=   3.2772n
+ + 0:reset   =   0.       0:vdd     =   1.8000   4:net23   =   1.8000 
+ + 5:net23   =   1.8000   6:net23   =   1.8000   7:net23   =   1.8000 
+ + 8:net23   =   1.8000   9:net23   =   1.8000  10:net23   =   1.8000 
+ +11:net23   =   1.8000  12:net23   =   1.8000  13:net23   =   1.8000 
+ +14:net23   =   1.8000  15:net23   =   1.8000  16:net23   =   1.8000 
+ +17:net23   =   1.8000  18:net23   =   1.8000  19:net23   =   1.8000 
+ +20:net23   =   1.8000  21:net23   =   1.8000 
+
+ 
+Warning: 3 port signals are assumed local to their subcircuits 
+ 
+Port signals that have the same names as global nets: 
+Location  Port name  Subckt             
+          "GND"      "INV"              
+          "GND"      "INV_WITH_RESET"   
+          "GND"      "INV2"             
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+ 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+Netlist Statistics 
+Type  Count   
+nmos  141     
+pmos  75      
+isrc  5       
+vsrc  15      
+ 
+Summary of Possible Problems in Netlist 
+Negative resistor              0   
+Negative capacitor             0   
+Negative inductor              0   
+Unconnected node               0   
+Dangling terminal              0   
+Non-rail bulk terminal         0   
+Floating MOS gate              0   
+Floating MOS bulk              0   
+Floating BJT substrate         0   
+Floating controlled input      0   
+Floating current source nodes  0   
+Source loop                    0   
+starting TRAN sweep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+0.0% CURRENTDEL = 125.800000 n ( etc = 0.0 sec, ett = 0.0 sec ) 
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 5:22, ett = 5:22 ) 
+( wall = 0.3 sec cpu = 0.1 sec s=0.186066 ) 
+10.0% time = 30.004241 ns ( etc = 4.1 sec, ett = 4.6 sec ) 
+( wall = 0.5 sec cpu = 0.6 sec s=1.32816 ) 
+20.0% time = 60.000357 ns ( etc = 2.4 sec, ett = 3.0 sec ) 
+( wall = 0.6 sec cpu = 1.2 sec s=1.96928 ) 
+30.0% time = 90.018156 ns ( etc = 1.8 sec, ett = 2.5 sec ) 
+( wall = 0.8 sec cpu = 1.8 sec s=2.35009 ) 
+40.0% time = 120.008916 ns ( etc = 1.4 sec, ett = 2.3 sec ) 
+( wall = 0.9 sec cpu = 2.4 sec s=2.61336 ) 
+50.0% time = 150.005867 ns ( etc = 1.1 sec, ett = 2.1 sec ) 
+( wall = 1.1 sec cpu = 3.0 sec s=2.81293 ) 
+60.0% time = 180.018365 ns ( etc = 0.9 sec, ett = 2.1 sec ) 
+( wall = 1.3 sec cpu = 3.7 sec s=2.92343 ) 
+70.0% time = 210.000345 ns ( etc = 0.6 sec, ett = 2.1 sec ) 
+( wall = 1.4 sec cpu = 4.4 sec s=3.02918 ) 
+80.0% time = 240.025401 ns ( etc = 0.4 sec, ett = 2.0 sec ) 
+( wall = 1.6 sec cpu = 5.0 sec s=3.11704 ) 
+90.0% time = 270.007234 ns ( etc = 0.2 sec, ett = 1.9 sec ) 
+( wall = 1.7 sec cpu = 5.5 sec s=3.1916 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1485e-07    param =  1.148e-07 
+rise_timing_before_pulse=    failed    (null) 
+timing_be_zero_1=  1.2659e-07    when/at= 1.266e-07 
+timing_be_zero_2=  1.2581e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3784e-07    when/at= 1.378e-07 
+result=  7.9023e-10    param =  7.902e-10 
+result2=  1.2580e-07    param =  1.258e-07 
+max_vol_1=  1.7938      from=   1.266e-07  to=   1.384e-07 
+ 
+ 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.9 sec ) 
+( wall = 1.9 sec cpu = 6.1 sec s=3.24955 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.41 sec    
+Peak Memory  250.43 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.8805 
+  Transient Wall time per timestep      = 0.0004 
+  Transient Wall time per timestep-node = 2.8962e-06 
+  Total CPU time                       = 6.4100 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 20.1 sec, ett = 20.1 sec ) 
+( wall = 0.0 sec cpu = 0.1 sec s=3.47914 ) 
+10.0% time = 30.004241 ns ( etc = 1.9 sec, ett = 2.1 sec ) 
+( wall = 0.2 sec cpu = 0.7 sec s=3.45265 ) 
+20.0% time = 60.000357 ns ( etc = 1.5 sec, ett = 1.9 sec ) 
+( wall = 0.4 sec cpu = 1.4 sec s=3.60183 ) 
+30.0% time = 90.018156 ns ( etc = 1.2 sec, ett = 1.7 sec ) 
+( wall = 0.5 sec cpu = 1.9 sec s=3.70775 ) 
+40.0% time = 120.008916 ns ( etc = 1.0 sec, ett = 1.7 sec ) 
+( wall = 0.7 sec cpu = 2.5 sec s=3.75447 ) 
+50.0% time = 150.001829 ns ( etc = 0.8 sec, ett = 1.7 sec ) 
+( wall = 0.8 sec cpu = 3.1 sec s=3.79354 ) 
+60.0% time = 180.019476 ns ( etc = 0.7 sec, ett = 1.6 sec ) 
+( wall = 1.0 sec cpu = 3.7 sec s=3.81359 ) 
+70.0% time = 210.030757 ns ( etc = 0.5 sec, ett = 1.6 sec ) 
+( wall = 1.1 sec cpu = 4.3 sec s=3.83882 ) 
+80.0% time = 240.017462 ns ( etc = 0.3 sec, ett = 1.6 sec ) 
+( wall = 1.3 sec cpu = 5.0 sec s=3.8372 ) 
+90.0% time = 270.002723 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.4 sec cpu = 5.6 sec s=3.84561 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1495e-07    param =  1.149e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2667e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3784e-07    when/at= 1.378e-07 
+result=  7.7207e-10    param =  7.721e-10 
+result2=  1.2590e-07    param =  1.259e-07 
+max_vol_1=  1.8304      from=   1.267e-07  to=   1.385e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.2 sec s=3.85409 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.17 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6002 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4644e-06 
+  Total CPU time                       = 6.1700 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  27/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 10.3 sec, ett = 10.3 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.88011 ) 
+10.0% time = 30.004241 ns ( etc = 1.3 sec, ett = 1.5 sec ) 
+( wall = 0.1 sec cpu = 0.6 sec s=3.95384 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.92862 ) 
+30.0% time = 90.018156 ns ( etc = 1.0 sec, ett = 1.5 sec ) 
+( wall = 0.4 sec cpu = 1.7 sec s=3.91809 ) 
+40.0% time = 120.008916 ns ( etc = 1.1 sec, ett = 1.8 sec ) 
+( wall = 0.7 sec cpu = 2.6 sec s=3.64983 ) 
+50.0% time = 150.026850 ns ( etc = 0.9 sec, ett = 1.7 sec ) 
+( wall = 0.9 sec cpu = 3.2 sec s=3.70478 ) 
+60.0% time = 180.011225 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.8 sec s=3.73363 ) 
+70.0% time = 210.003915 ns ( etc = 0.5 sec, ett = 1.7 sec ) 
+( wall = 1.2 sec cpu = 4.4 sec s=3.76328 ) 
+80.0% time = 240.029459 ns ( etc = 0.3 sec, ett = 1.6 sec ) 
+( wall = 1.3 sec cpu = 5.0 sec s=3.78969 ) 
+90.0% time = 270.002956 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.5 sec cpu = 5.5 sec s=3.80541 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1505e-07    param =  1.150e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3785e-07    when/at= 1.378e-07 
+result=  7.2030e-10    param =  7.203e-10 
+result2=  1.2600e-07    param =  1.260e-07 
+max_vol_1=  1.8406      from=   1.268e-07  to=   1.386e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.2 sec s=3.80759 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.18 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6233 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4959e-06 
+  Total CPU time                       = 6.1800 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 12.6 sec, ett = 12.6 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.16557 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.82902 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.87016 ) 
+30.0% time = 90.018156 ns ( etc = 1.0 sec, ett = 1.5 sec ) 
+( wall = 0.4 sec cpu = 1.7 sec s=3.92253 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.3 sec s=3.90186 ) 
+50.0% time = 150.003542 ns ( etc = 0.7 sec, ett = 1.5 sec ) 
+( wall = 0.7 sec cpu = 2.9 sec s=3.92084 ) 
+60.0% time = 180.020797 ns ( etc = 0.6 sec, ett = 1.5 sec ) 
+( wall = 0.9 sec cpu = 3.5 sec s=3.91305 ) 
+70.0% time = 210.000870 ns ( etc = 0.5 sec, ett = 1.6 sec ) 
+( wall = 1.2 sec cpu = 4.3 sec s=3.76674 ) 
+80.0% time = 240.001411 ns ( etc = 0.3 sec, ett = 1.6 sec ) 
+( wall = 1.3 sec cpu = 4.9 sec s=3.78308 ) 
+90.0% time = 270.003488 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.4 sec cpu = 5.5 sec s=3.80398 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1515e-07    param =  1.151e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3785e-07    when/at= 1.378e-07 
+result=  6.1804e-10    param =  6.180e-10 
+result2=  1.2610e-07    param =  1.261e-07 
+max_vol_1=  1.8423      from=   1.269e-07  to=   1.387e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.1 sec s=3.81789 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.08 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.5927 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4569e-06 
+  Total CPU time                       = 6.0800 
+  Total CPU time per step              = 0.0012 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  25/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 11.3 sec, ett = 11.3 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.54391 ) 
+10.0% time = 30.004241 ns ( etc = 1.3 sec, ett = 1.5 sec ) 
+( wall = 0.1 sec cpu = 0.6 sec s=3.90817 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.89688 ) 
+30.0% time = 90.018156 ns ( etc = 1.1 sec, ett = 1.5 sec ) 
+( wall = 0.5 sec cpu = 1.8 sec s=3.84083 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.4 sec s=3.86496 ) 
+50.0% time = 150.005240 ns ( etc = 0.8 sec, ett = 1.5 sec ) 
+( wall = 0.8 sec cpu = 3.0 sec s=3.89169 ) 
+60.0% time = 180.011342 ns ( etc = 0.6 sec, ett = 1.5 sec ) 
+( wall = 0.9 sec cpu = 3.6 sec s=3.89094 ) 
+70.0% time = 210.003771 ns ( etc = 0.5 sec, ett = 1.5 sec ) 
+( wall = 1.1 sec cpu = 4.2 sec s=3.90689 ) 
+80.0% time = 240.001462 ns ( etc = 0.3 sec, ett = 1.5 sec ) 
+( wall = 1.2 sec cpu = 4.8 sec s=3.90403 ) 
+90.0% time = 270.031632 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.5 sec cpu = 5.6 sec s=3.82318 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1525e-07    param =  1.152e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3784e-07    when/at= 1.378e-07 
+result=  5.1956e-10    param =  5.196e-10 
+result2=  1.2620e-07    param =  1.262e-07 
+max_vol_1=  1.8342      from=   1.270e-07  to=   1.388e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.2 sec s=3.83297 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.24 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6255 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.5045e-06 
+  Total CPU time                       = 6.2400 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  27/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 16.4 sec, ett = 16.5 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.03821 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.6 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.76333 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.82355 ) 
+30.0% time = 90.018156 ns ( etc = 1.1 sec, ett = 1.5 sec ) 
+( wall = 0.5 sec cpu = 1.8 sec s=3.87639 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.3 sec s=3.89523 ) 
+50.0% time = 150.001812 ns ( etc = 0.8 sec, ett = 1.6 sec ) 
+( wall = 0.8 sec cpu = 3.0 sec s=3.86308 ) 
+60.0% time = 180.000354 ns ( etc = 0.6 sec, ett = 1.6 sec ) 
+( wall = 0.9 sec cpu = 3.6 sec s=3.86891 ) 
+70.0% time = 210.028654 ns ( etc = 0.5 sec, ett = 1.6 sec ) 
+( wall = 1.1 sec cpu = 4.2 sec s=3.87751 ) 
+80.0% time = 240.020321 ns ( etc = 0.3 sec, ett = 1.5 sec ) 
+( wall = 1.2 sec cpu = 4.8 sec s=3.8932 ) 
+90.0% time = 270.013106 ns ( etc = 0.2 sec, ett = 1.5 sec ) 
+( wall = 1.4 sec cpu = 5.4 sec s=3.89685 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1535e-07    param =  1.153e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2673e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3784e-07    when/at= 1.378e-07 
+result=  4.2811e-10    param =  4.281e-10 
+result2=  1.2630e-07    param =  1.263e-07 
+max_vol_1=  1.8382      from=   1.271e-07  to=   1.389e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.5 sec ) 
+( wall = 1.5 sec cpu = 6.0 sec s=3.9017 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     5.97 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.5277 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.3490e-06 
+  Total CPU time                       = 5.9700 
+  Total CPU time per step              = 0.0012 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 11.0 sec, ett = 11.0 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.63175 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.92632 ) 
+20.0% time = 60.000357 ns ( etc = 1.7 sec, ett = 2.1 sec ) 
+( wall = 0.4 sec cpu = 1.5 sec s=3.57635 ) 
+30.0% time = 90.018156 ns ( etc = 1.3 sec, ett = 1.9 sec ) 
+( wall = 0.6 sec cpu = 2.1 sec s=3.67681 ) 
+40.0% time = 120.008916 ns ( etc = 1.1 sec, ett = 1.8 sec ) 
+( wall = 0.7 sec cpu = 2.7 sec s=3.73178 ) 
+50.0% time = 150.001861 ns ( etc = 0.9 sec, ett = 1.8 sec ) 
+( wall = 0.9 sec cpu = 3.3 sec s=3.76523 ) 
+60.0% time = 180.011265 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.9 sec s=3.79064 ) 
+70.0% time = 210.040188 ns ( etc = 0.5 sec, ett = 1.7 sec ) 
+( wall = 1.2 sec cpu = 4.6 sec s=3.80079 ) 
+80.0% time = 240.006349 ns ( etc = 0.3 sec, ett = 1.7 sec ) 
+( wall = 1.3 sec cpu = 5.1 sec s=3.81346 ) 
+90.0% time = 270.029513 ns ( etc = 0.2 sec, ett = 1.7 sec ) 
+( wall = 1.5 sec cpu = 5.8 sec s=3.82579 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1545e-07    param =  1.154e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2674e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3783e-07    when/at= 1.378e-07 
+result=  3.4475e-10    param =  3.448e-10 
+result2=  1.2640e-07    param =  1.264e-07 
+max_vol_1=  1.8294      from=   1.272e-07  to=   1.390e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.3 sec s=3.83989 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.35 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6504 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.5381e-06 
+  Total CPU time                       = 6.3500 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  27/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 11.1 sec, ett = 11.1 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.6143 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.86116 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.88474 ) 
+30.0% time = 90.018156 ns ( etc = 1.0 sec, ett = 1.5 sec ) 
+( wall = 0.4 sec cpu = 1.7 sec s=3.90225 ) 
+40.0% time = 120.008916 ns ( etc = 1.0 sec, ett = 1.7 sec ) 
+( wall = 0.7 sec cpu = 2.6 sec s=3.64562 ) 
+50.0% time = 150.000124 ns ( etc = 0.9 sec, ett = 1.7 sec ) 
+( wall = 0.9 sec cpu = 3.2 sec s=3.70153 ) 
+60.0% time = 180.009246 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.8 sec s=3.73867 ) 
+70.0% time = 210.024978 ns ( etc = 0.5 sec, ett = 1.7 sec ) 
+( wall = 1.2 sec cpu = 4.4 sec s=3.76875 ) 
+80.0% time = 240.020611 ns ( etc = 0.3 sec, ett = 1.6 sec ) 
+( wall = 1.3 sec cpu = 5.0 sec s=3.7896 ) 
+90.0% time = 270.008987 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.5 sec cpu = 5.5 sec s=3.80771 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1555e-07    param =  1.155e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2679e-07    when/at= 1.268e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3782e-07    when/at= 1.378e-07 
+result=  2.9006e-10    param =  2.901e-10 
+result2=  1.2650e-07    param =  1.265e-07 
+max_vol_1=  1.8325      from=   1.273e-07  to=   1.391e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.2 sec s=3.81215 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.18 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6214 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4977e-06 
+  Total CPU time                       = 6.1800 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 9.5 sec, ett = 9.5 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.15519 ) 
+10.0% time = 30.004241 ns ( etc = 1.3 sec, ett = 1.5 sec ) 
+( wall = 0.1 sec cpu = 0.6 sec s=3.92011 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.96033 ) 
+30.0% time = 90.018156 ns ( etc = 1.0 sec, ett = 1.5 sec ) 
+( wall = 0.4 sec cpu = 1.7 sec s=3.93322 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.3 sec s=3.92558 ) 
+50.0% time = 150.031054 ns ( etc = 0.7 sec, ett = 1.5 sec ) 
+( wall = 0.7 sec cpu = 2.9 sec s=3.92917 ) 
+60.0% time = 180.000176 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.8 sec s=3.80064 ) 
+70.0% time = 210.000836 ns ( etc = 0.5 sec, ett = 1.6 sec ) 
+( wall = 1.1 sec cpu = 4.4 sec s=3.82238 ) 
+80.0% time = 240.025099 ns ( etc = 0.3 sec, ett = 1.6 sec ) 
+( wall = 1.3 sec cpu = 5.0 sec s=3.83623 ) 
+90.0% time = 270.002916 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.4 sec cpu = 5.6 sec s=3.84425 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1565e-07    param =  1.156e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2687e-07    when/at= 1.269e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.3782e-07    when/at= 1.378e-07 
+result=  2.6725e-10    param =  2.673e-10 
+result2=  1.2660e-07    param =  1.266e-07 
+max_vol_1=  1.8335      from=   1.274e-07  to=   1.392e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.1 sec s=3.85657 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.14 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.5923 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4523e-06 
+  Total CPU time                       = 6.1400 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  27/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 12.6 sec, ett = 12.6 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.17865 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.87051 ) 
+20.0% time = 60.000357 ns ( etc = 1.3 sec, ett = 1.6 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.80582 ) 
+30.0% time = 90.018156 ns ( etc = 1.1 sec, ett = 1.6 sec ) 
+( wall = 0.5 sec cpu = 1.8 sec s=3.85336 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.4 sec s=3.865 ) 
+50.0% time = 150.001962 ns ( etc = 0.8 sec, ett = 1.6 sec ) 
+( wall = 0.8 sec cpu = 3.0 sec s=3.87613 ) 
+60.0% time = 180.011235 ns ( etc = 0.6 sec, ett = 1.6 sec ) 
+( wall = 0.9 sec cpu = 3.6 sec s=3.89188 ) 
+70.0% time = 210.007272 ns ( etc = 0.5 sec, ett = 1.5 sec ) 
+( wall = 1.1 sec cpu = 4.2 sec s=3.90294 ) 
+80.0% time = 240.017878 ns ( etc = 0.3 sec, ett = 1.5 sec ) 
+( wall = 1.2 sec cpu = 4.8 sec s=3.90651 ) 
+90.0% time = 270.031845 ns ( etc = 0.2 sec, ett = 1.7 sec ) 
+( wall = 1.5 sec cpu = 5.7 sec s=3.82052 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1575e-07    param =  1.157e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2671e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.2671e-07    when/at= 1.267e-07 
+result=  7.5391e-12    param =  7.539e-12 
+result2=  1.2670e-07    param =  1.267e-07 
+max_vol_1=  1.8418      from=   1.275e-07  to=   1.393e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.3 sec s=3.82878 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.30 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6448 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.5291e-06 
+  Total CPU time                       = 6.3000 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 9.9 sec, ett = 10.0 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=4.01849 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.91384 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.92116 ) 
+30.0% time = 90.018156 ns ( etc = 1.0 sec, ett = 1.5 sec ) 
+( wall = 0.4 sec cpu = 1.7 sec s=3.92072 ) 
+40.0% time = 120.008916 ns ( etc = 0.9 sec, ett = 1.5 sec ) 
+( wall = 0.6 sec cpu = 2.4 sec s=3.87104 ) 
+50.0% time = 150.000773 ns ( etc = 0.8 sec, ett = 1.6 sec ) 
+( wall = 0.8 sec cpu = 3.0 sec s=3.89703 ) 
+60.0% time = 180.029284 ns ( etc = 0.6 sec, ett = 1.5 sec ) 
+( wall = 0.9 sec cpu = 3.6 sec s=3.90517 ) 
+70.0% time = 210.030818 ns ( etc = 0.5 sec, ett = 1.5 sec ) 
+( wall = 1.1 sec cpu = 4.2 sec s=3.91184 ) 
+80.0% time = 240.017462 ns ( etc = 0.3 sec, ett = 1.5 sec ) 
+( wall = 1.2 sec cpu = 4.8 sec s=3.89368 ) 
+90.0% time = 270.032871 ns ( etc = 0.2 sec, ett = 1.5 sec ) 
+( wall = 1.4 sec cpu = 5.4 sec s=3.90446 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1585e-07    param =  1.158e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.2682e-07    when/at= 1.268e-07 
+result=  -8.1437e-11    param = -8.144e-11 
+result2=  1.2680e-07    param =  1.268e-07 
+max_vol_1=  1.8396      from=   1.276e-07  to=   1.394e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.5 sec ) 
+( wall = 1.5 sec cpu = 6.0 sec s=3.90754 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.00 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.5348 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.3522e-06 
+  Total CPU time                       = 6.0000 
+  Total CPU time per step              = 0.0012 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  26/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 13.1 sec, ett = 13.1 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=3.04581 ) 
+10.0% time = 30.004241 ns ( etc = 2.3 sec, ett = 2.6 sec ) 
+( wall = 0.3 sec cpu = 0.8 sec s=3.3055 ) 
+20.0% time = 60.000357 ns ( etc = 1.6 sec, ett = 2.0 sec ) 
+( wall = 0.4 sec cpu = 1.4 sec s=3.53029 ) 
+30.0% time = 90.018156 ns ( etc = 1.3 sec, ett = 1.9 sec ) 
+( wall = 0.6 sec cpu = 2.0 sec s=3.64887 ) 
+40.0% time = 120.008916 ns ( etc = 1.1 sec, ett = 1.8 sec ) 
+( wall = 0.7 sec cpu = 2.6 sec s=3.70835 ) 
+50.0% time = 150.000745 ns ( etc = 0.9 sec, ett = 1.7 sec ) 
+( wall = 0.9 sec cpu = 3.3 sec s=3.75595 ) 
+60.0% time = 180.015028 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.9 sec s=3.77891 ) 
+70.0% time = 210.003525 ns ( etc = 0.5 sec, ett = 1.7 sec ) 
+( wall = 1.2 sec cpu = 4.5 sec s=3.79362 ) 
+80.0% time = 240.025236 ns ( etc = 0.3 sec, ett = 1.7 sec ) 
+( wall = 1.3 sec cpu = 5.1 sec s=3.81255 ) 
+90.0% time = 270.002472 ns ( etc = 0.2 sec, ett = 1.6 sec ) 
+( wall = 1.5 sec cpu = 5.7 sec s=3.83177 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1595e-07    param =  1.159e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.2692e-07    when/at= 1.269e-07 
+result=  -1.8144e-10    param = -1.814e-10 
+result2=  1.2690e-07    param =  1.269e-07 
+max_vol_1=  1.8420      from=   1.277e-07  to=   1.395e-07 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.6 sec ) 
+( wall = 1.6 sec cpu = 6.2 sec s=3.83877 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.24 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.6257 
+  Transient Wall time per timestep      = 0.0003 
+  Transient Wall time per timestep-node = 2.4986e-06 
+  Total CPU time                       = 6.2400 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+ 
+ 
+TRAN sweep:  
+ 
+   
+Running HSPICE Precision Parallel (HPP) 
+NDD transient simulation 
+.   
+SSolve ...  
+  
+CT 16 
+Running 4 threads. 
+  
+ 
+License user information 
+FLEXLM    v8.5b          
+USER      sai            
+HOSTNAME  linux19        
+HOSTID    60a44cb1708a   
+PID       7741           
+ 
+License file: 1700@vdec-cad1 
+license  checkout number  expiration date       # in use / total  server      
+hspice   1                31-mar-2015/2013.12  28/180             vdec-cad1   
+ Number of threads: 4 
+ Number of available CPUs: 4 
+ 
+0.1% time = 312.334788 ps ( etc = 11.2 sec, ett = 11.2 sec ) 
+( wall = 0.0 sec cpu = 0.0 sec s=2.67522 ) 
+10.0% time = 30.004241 ns ( etc = 1.4 sec, ett = 1.5 sec ) 
+( wall = 0.2 sec cpu = 0.6 sec s=3.85798 ) 
+20.0% time = 60.000357 ns ( etc = 1.2 sec, ett = 1.5 sec ) 
+( wall = 0.3 sec cpu = 1.2 sec s=3.87055 ) 
+30.0% time = 90.018156 ns ( etc = 1.3 sec, ett = 1.8 sec ) 
+( wall = 0.6 sec cpu = 2.0 sec s=3.62243 ) 
+40.0% time = 120.008916 ns ( etc = 1.1 sec, ett = 1.8 sec ) 
+( wall = 0.7 sec cpu = 2.6 sec s=3.69541 ) 
+50.0% time = 150.028449 ns ( etc = 0.9 sec, ett = 1.7 sec ) 
+( wall = 0.9 sec cpu = 3.3 sec s=3.74788 ) 
+60.0% time = 180.007722 ns ( etc = 0.7 sec, ett = 1.7 sec ) 
+( wall = 1.0 sec cpu = 3.9 sec s=3.77185 ) 
+70.0% time = 210.001419 ns ( etc = 0.5 sec, ett = 1.7 sec ) 
+( wall = 1.2 sec cpu = 4.5 sec s=3.79408 ) 
+80.0% time = 240.025423 ns ( etc = 0.3 sec, ett = 1.7 sec ) 
+( wall = 1.3 sec cpu = 5.1 sec s=3.81875 ) 
+90.0% time = 270.025058 ns ( etc = 0.2 sec, ett = 1.7 sec ) 
+( wall = 1.5 sec cpu = 5.7 sec s=3.82358 ) 
+****** 
+*** 
+ ******  transient analysis       temp=  27 
+ ****** 
+pulse_width=  8.4507e-10    targ=   6.909e-09 trig=   6.064e-09 
+timing1=  6.1687e-09    when/at= 6.169e-09 
+timing2=  1.7969e-08    when/at= 1.797e-08 
+period=  1.1800e-08    param =  1.180e-08 
+timing4=  1.1605e-07    param =  1.160e-07 
+rise_timing_before_pulse=  6.0640e-09    when/at= 6.064e-09 
+timing_be_zero_1=  1.2672e-07    when/at= 1.267e-07 
+timing_be_zero_2=  1.2584e-07    when/at= 1.258e-07 
+timing_be_zero_3=  1.2702e-07    when/at= 1.270e-07 
+result=  -2.8144e-10    param = -2.814e-10 
+result2=  1.2700e-07    param =  1.270e-07 
+max_vol_1=  1.8394      from=   1.278e-07  to=   1.396e-07 
+ 
+100.0% time = 300.000000 ns ( etc = 0.0 sec, ett = 1.8 sec ) 
+( wall = 1.8 sec cpu = 6.4 sec s=3.52274 ) 
+ *************************  
+ 
+Resource Usage for Transient Analysis 
+CPU Time     6.42 sec    
+Peak Memory  253.41 Mb   
+  
+Wall Time Statistics:  
+  Transient Wall time                   = 1.8198 
+  Transient Wall time per timestep      = 0.0004 
+  Transient Wall time per timestep-node = 2.7935e-06 
+  Total CPU time                       = 6.4200 
+  Total CPU time per step              = 0.0013 
+ 
+ 
+ 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+Warning:  pulse rise time is  < or = zero, reset to tstep 
+Warning:  pulse fall time is  < or = zero, reset to tstep 
+
+Compressing 
+finished TRAN sweep (81.0 sec) 
+ 
+
+TRAN sweep time = 81.0 cpu sec 
+
+          ***** job concluded
+1****** HSPICE -- F-2011.09-SP2 64-BIT (Feb 27 2012) linux ******               
+ ******  
+ .title 3nand_2_np_errorall
+
+  ******  job statistics summary tnom=  25.000 temp=  27.000 *****
+  
+  
+ ******  Machine Information  ******
+ CPU:
+ model name	: Intel(R) Core(TM) i3-3220 CPU @ 3.30GHz
+ cpu MHz	: 3300.000
+  
+ OS:
+ Linux version 2.6.18-371.9.1.el5 (mockbuild@builder17.centos.org) (gcc version 
+ 4.1.2 20080704 (Red Hat 4.1.2-54)) #1 SMP Tue Jun 10 17:49:56 EDT 2014
+
+
+  ******  HSPICE Threads Information  ******
+
+  Command Line Threads Count :     4
+  Available CPU Count        :     4
+  Actual Threads Count       :     4
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =     120 # elements   =     235
+  # resistors   =       0 # capacitors =       0 # inductors   =       0
+  # mutual_inds =       0 # vccs       =       0 # vcvs        =       0
+  # cccs        =       0 # ccvs       =       0 # volt_srcs   =      14
+  # curr_srcs   =       5 # diodes     =       0 # bjts        =       0
+  # jfets       =       0 # mosfets    =     216 # U elements  =       0
+  # T elements  =       0 # W elements =       0 # B elements  =       0
+  # S elements  =       0 # P elements =       0 # va device   =       0
+  # vector_srcs =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.14           1         109
+  transient         21.34     3900013      195210       63536  rev= 1526 
+  readin             0.08
+  errchk             0.01
+  setup              0.02
+  output             0.00
+           peak memory used        253.41 megabytes 
+           total cpu time           23.31 seconds
+           total elapsed time       24.74 seconds
+           job started at     18:11:30 03/25/2015
+           job ended   at     18:11:55 03/25/2015
+
+
+ lic: Release hspice token(s) 

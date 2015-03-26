@@ -1,7 +1,26 @@
-#encoding:utf-8
+ #encoding:utf-8
 import os, sys, getopt, operator, csv, re
+import math
 from copy import deepcopy
 
+#查找一个元素的所有位置
+def find_all_index(arr, search):
+	return [index for index,item in enumerate(arr) if item == search]
+
+def find_all_index_2(arr, search):
+	return [index for index, item in enumerate(arr) if search in item]
+
+def extract_data(line):
+	data_name, data = '', ''
+	data_name = line.split('=')[0]
+	raw_data = line.split('  ')[1]
+	if 'e' in raw_data:
+		data = float(raw_data.split('e')[0])/10**float(raw_data.split('e')[1].strip('-'))
+	elif raw_data:
+		data = raw_data
+	else:
+		data = ''
+	return(data_name, data)
 
 
 def shift_timing(start_timing, end_timing, current_height, injection_node, output_node, input_file, sim_time):
@@ -55,11 +74,11 @@ def shift_timing(start_timing, end_timing, current_height, injection_node, outpu
 
 	#'''
 	#进行 Hspice Simulation
-	os.system('hspice64 -hpp -mt 4  -i ' + input_file + ' -o ../waveform/shift_timing_result' + str(sim_time) +'.lis')
+	os.system('hspice64 -hpp -mt 4  -i ' + input_file + ' -o ../waveform/shift_timing_result-' + start_timing + '-' + end_timing + '.lis')
 	read_file.close()
 
 	#读取.lis文件统计错误率
-	file = open('../waveform/shift_timing_result' + str(sim_time) + '.lis', 'r')
+	file = open('../waveform/shift_timing_result-' + start_timing + '-' + end_timing + '.lis', 'r')
 	lis_file = file.readlines()
 
 	#sim_times : 进行模拟的总次数    error_times : 出现错误的总次数
@@ -141,11 +160,11 @@ def shift_current_height(start_height, end_height, interval, injection_node, inj
 
 	#'''
 	#进行 Hspice Simulation
-	os.system('hspice64 -hpp -mt 4  -i ' + input_file + ' -o ../waveform/shift_current_height_result' + str(sim_time) +'.lis')
+	os.system('hspice64 -hpp -mt 4  -i ' + input_file + ' -o ../waveform/shift_current_height_result-'+ start_height + '-' + end_height +'.lis')
 	read_file.close()
 
 	#读取.lis文件统计错误率
-	file = open('../waveform/shift_current_height_result' + str(sim_time) + '.lis', 'r')
+	file = open('../waveform/shift_current_height_result-' + start_height + '-' + end_height +'.lis', 'r')
 	lis_file = file.readlines()
 
 	
@@ -187,6 +206,50 @@ def shift_current_height(start_height, end_height, interval, injection_node, inj
 	output_csv_file.close()
 	#'''
 
+#处理 .lis 文件以判断波形中是否出现错误
+def analyze_waveform(lis_file):
+	with open(lis_file) as temp_file:
+		file = temp_file.readlines()
+		result_list = []
+
+		#先找到'transient analysis'所在行的行数, 用来确定每次模拟的结果在文件中所在的位置
+		#以 'transient analysis'所在行作为截取上限
+		for line in file:
+			if re.findall(r'transient analysis', line):
+				line_index_list_1 = find_all_index(file, line)
+
+		#以 '100.0%time'所在行作为截取下限
+		line_index_list_2 = find_all_index_2(file, r'100.0% time =')
+
+		#print('line_index_list_1', line_index_list_1)
+		#print('line_index_list_2', line_index_list_2)
+
+		#根据截取上限和下限, 截取中间部分的参数数据, 并清楚空白行
+		temp_file = []
+		for line_number in line_index_list_1:
+			temp_file.append(file[line_number+2:line_number+14])
+
+		for i in range(len(line_index_list_1)):
+			single_result = file[line_index_list_1[i]+2:line_index_list_2[i]]
+
+			#清楚中间空白行
+			while ' \n' in single_result:
+				single_result.remove(' \n')
+
+		#每一次的模拟结果保存在 single_result_dict 中, 不同的参数对应后面不同的数值
+		#最后将所有的 single_result_dict 填加到 result_list 列表之中
+		for single_result in temp_file:
+			single_result_dict = {}
+			for item in single_result:
+				data_name, data = extract_data(item)
+				single_result_dict[data_name] = data
+			result_list.append(single_result_dict)
+		print('result_list')
+		for part in result_list:
+			print(part)
+			print()				
+
+
 
 #从命令行中获取 CSV 文件
 #可以是储存了不同 current height 的, 也可以是储存了不同 injection timing 的 CSV 文件
@@ -196,7 +259,7 @@ opts, args = getopt.getopt(sys.argv[1:], "hi:c:m:")
 input_file, simulation_mode, input_csv_file = '', '', ''
 
 def usage():
-	#比如 python command_with_csv.py -i 3NAND_2_NP_errorall.sp -m 1 -c timing.csv
+	#比如 python Python-based Simulation.py -i 3NAND_2_NP_errorall.sp -m 1 -c timing.csv
 	print('Usage: ' + sys.argv[0] + ' -i input_file.sp -m simulation_mode -c input_csv_file')
 
 for op, value in opts:
@@ -223,6 +286,7 @@ for line in CSV_file:
 		single_data = line[0].split(';')
 		input_data.append(single_data)
 
+'''
 #记录模拟的次数， 用于标记输出文件
 sim_time = 0
 for data in input_data:
@@ -239,3 +303,6 @@ if simulation_mode == '1':
 	print('Shift timing simulation done! ---> shift_timing_error_calculation.csv')
 elif simulation_mode == '2':
 	print('Shift current height simulation done! ---> shift_current_height_error_calculation.csv')
+'''
+
+analyze_waveform('../waveform/test.lis')
