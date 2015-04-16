@@ -9,7 +9,7 @@
 .param vdd = 1.8
 
 .TRAN 1p simtime
-.param currentdelay69 = 164n   ***N_and_3
+.param currentdelay69 =137.2n  ***N_and_3
 .param currentheight = -4000e-6   * 4000e-6   ***100e-6 = 0.1mA  
 
 *.TRAN 1p simtime sweep currentdelay69 135n 137n 0.1n

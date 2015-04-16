@@ -68,19 +68,11 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 					if '.param currentdelay' + injection_node[1:] in line_2:
 						#comment out 注入 node 所在行的命令
 						temp_file[line_number+line_index+2] = '*' + line_2
-						#并把本命令行保存下来, 在下面的部分使用
-						currentdelay_option = line_2.split(' ')
 
 		#通过替换 .param currentdelay = **n 这行命令中的 ** 来定义不同的 injection timing
 		for line_number, line in enumerate(temp_file):
 			if '.TRAN 1p simtime' in line and '*' not in line:
-				#currentdelay_option[3] = str(injection_timing) + 'n'
-				#temp_file[line_number+1] = ' '.join(currentdelay_option)
-				print('injection_timing', injection_timing)
-				print('line', re.sub('\d+\w', str(injection_timing) + 'n', temp_file[line_number+1]))
-
-				temp_file[line_number+1] = re.sub('\d{3}.\d{1}', str(injection_timing) + 'n', temp_file[line_number+1])
-
+				temp_file[line_number+1] = re.sub('\s\d+\w\s', str(injection_timing) + 'n', temp_file[line_number+1])
 
 		#替换 .MEASURE command 中的有关 injection node 的参数部分
 		for line_number, line in enumerate(temp_file):
