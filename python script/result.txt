@@ -1,0 +1,8 @@
+
+
+Data Analysis 
+number_of_simulation : 0 
+number_of_normal : 0 
+number_of_deadlock : 0 
+number_of_transient_pulse : 0 
+time used(s) : 0.00744390487671

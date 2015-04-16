@@ -12,7 +12,7 @@
 .param currentdelay69 = 164n   ***N_and_3
 .param currentheight = -4000e-6   * 4000e-6   ***100e-6 = 0.1mA  
 
-.TRAN 1p simtime sweep currentdelay69 100n 110n 0.1n
+*.TRAN 1p simtime sweep currentdelay69 135n 137n 0.1n
 
 
 *** 测量波形宽度 pulse_width(OK)
@@ -25,10 +25,10 @@
 .MEASURE TRAN period PARAM='timing2-timing1'
 
 
-*** 测量注入pulse_width的timing的前面最近的一个上升点(NG)
-.MEASURE TRAN timing3 PARAM='currentdelay69-period+pulse_width'
+*** 判断deadlock
+*** 测量注入pulse_width的timing的前面最近的一个上升点
+.MEASURE TRAN timing3 PARAM='currentdelay69-period'
 .MEASURE TRAN rise_timing_before_pulse WHEN V(n_and_3)=0.1 RISE=LAST TO=currentdelay69
-
 
 *** 注入 error pulse 之后 第一次电压降低到0的 timing
 .MEASURE TRAN rise_timing_1 WHEN V(n_and_3)=0.05 RISE=1 FROM=currentdelay69
@@ -39,35 +39,15 @@
 .MEASURE TRAN fall_timing_3 WHEN V(n_and_3)=0.05 FALL=3 FROM=currentdelay69
 
 
-
-*** 注入error pulse之后0.2ns之内的最低电压 若此电压低于一定值 则表示“凹”的情况发生
-***.MEASURE TRAN min_vol MIN V(n_and_3) FROM=currentdelay69 TO='currentdelay69+0.2n'
-***.MEASURE TRAN timing3 WHEN V(n_and_3)=min_vol FROM=currentdelay69
-***.MEASURE TRAN max_vol_3 MAX V(n_and_3) FROM=timing3 TO='timing3+period-pulse_width'
-
-
-*** 判断正常波形
-*** 自error pulse injection timing之后，一个pulse之后到一个pulse＋period之间的最大电压
-.MEASURE TRAN max_vol_1 MAX V(n_and_3) FROM='currentdelay69+pulse_width' TO='currentdelay69+pulse_width+period'
+*** 判断正常波形: 在timing3之后两个周期内的最大电压都达到VDD
+.MEASURE TRAN max_vol_1 MAX V(n_and_3) FROM='timing3' TO='timing3 + period'
+.MEASURE TRAN max_vol_2 MAX V(n_and_3) FROM='timing3 + period' TO='timing3 + period*2'
+.MEASURE TRAN max_vol_3 MAX V(n_and_3) FROM='timing3 + period*2' TO='timing3 + period*3'
 
 
-*** 测量输出信号的最大电压值
-*.MEASURE TRAN n_and_3_maxvol MAX V(n_and_3) FROM=0n TO=simtime
-*.MEASURE TRAN n_nand_3_maxvol MAX V(n_nand_3) FROM=0n TO=simtime
-*.MEASURE TRAN p_and_3_maxvol MAX V(p_and_3) FROM=0n TO=simtime
-*.MEASURE TRAN p_nand_3_maxvol MAX V(p_nand_3) FROM=0n TO=simtime
-*.MEASURE TRAN cd_3_maxvol MAX V(cd_3) FROM=0n TO=simtime
-
-*.MEASURE TRAN target_voltage FIND V(n_and_3) AT currentdelay69
-*.MEASURE TRAN t_recovery WHEN V(n_and_3)=target_voltage FROM='currentdelay69+0.0001n' TO=simtime
-
-*.MEASURE TRAN n_and_3_minvol MIN V(n_and_3) FROM=currentdelay69 TO='currentdelay69+1n'
-*.MEASURE TRAN n_and_3_minvol MIN V(n_and_3) FROM=0 TO=simtime
-*.MEASURE TRAN n_nand_3_minvol MIN V(n_nand_3) FROM=currentdelay70 TO='currentdelay70+0.1n'
-*.MEASURE TRAN p_and_3_minvol MIN V(p_and_3) FROM=currentdelay71 TO='currentdelay71+0.1n'
-*.MEASURE TRAN p_nand_3_minvol MIN V(p_nand_3) FROM=currentdelay72 TO='currentdelay72+0.1n'
-*.MEASURE TRAN cd_3_minvol MIN V(cd_3) FROM=currentdelay73 TO='currentdelay73+0.1n'
-
+*** 判断是否出现 transient pulse
+***
+.MEASURE TRAN fall_timing_before_pulse WHEN V(n_and_3)=0.3 FALL=LAST TO=currentdelay69
 
 VVDD  VDD  0 DC vdd               
 VGND  GND  0 DC 0                  
@@ -109,9 +89,13 @@ VNC_p NC_p 0 PULSE(0 vdd latency4 0n 0n pw2 period2)
 * SIN(voffset vamp freq tdelay)       $ SIN wave
 
 *$ Specify parameter set file
-.include "../../../../../rules/rohm180/spice/hspice/bu40n1.mdl"
-.lib "../../../../../rules/rohm180/spice/hspice/bu40n1.skw" NT
-.lib "../../../../../rules/rohm180/spice/hspice/bu40n1.skw" PT
+*.include "../../../../../rules/rohm180/spice/hspice/bu40n1.mdl"
+*.lib "../../../../../rules/rohm180/spice/hspice/bu40n1.skw" NT
+*.lib "../../../../../rules/rohm180/spice/hspice/bu40n1.skw" PT
+
+.include "/usr1/sai/design/rules/rohm180/spice/hspice/bu40n1_hdif64.mdl"
+.lib "/usr1/sai/design/rules/rohm180/spice/hspice/bu40n1.skw" NT
+.lib "/usr1/sai/design/rules/rohm180/spice/hspice/bu40n1.skw" PT
 
 
 *********************netlist_sim**********************

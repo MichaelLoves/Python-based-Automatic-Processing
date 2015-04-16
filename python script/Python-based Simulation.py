@@ -226,15 +226,13 @@ def analyze_waveform(lis_file):
 
 		#根据截取上限和下限, 截取中间部分的参数数据, 并清楚空白行
 		temp_file = []
-		for line_number in line_index_list_1:
-			temp_file.append(file[line_number+2:line_number+14])
-
 		for i in range(len(line_index_list_1)):
+			#从 'transient analysis'下面的第二行到 '100.0% time'上面一行
 			single_result = file[line_index_list_1[i]+2:line_index_list_2[i]]
-
 			#清楚中间空白行
 			while ' \n' in single_result:
 				single_result.remove(' \n')
+			temp_file.append(single_result)
 
 		#每一次的模拟结果保存在 single_result_dict 中, 不同的参数对应后面不同的数值
 		#最后将所有的 single_result_dict 填加到 result_list 列表之中
@@ -244,10 +242,24 @@ def analyze_waveform(lis_file):
 				data_name, data = extract_data(item)
 				single_result_dict[data_name] = data
 			result_list.append(single_result_dict)
-		print('result_list')
-		for part in result_list:
-			print(part)
-			print()				
+		
+		#输出 single_result 内容
+		#print('*'*40 + 'result_list' + '*'*40)
+		#for single_result in result_list:
+		#	print(single_result)
+		#	print()		
+
+		#统计出现 deadlock 错误的次数
+		deadlock_number = 0
+		for single_result in result_list:
+			if is_DeadlocK(single_result):
+				deadlock_number += 1
+		print('deadlock_number', deadlock_number)
+
+def is_DeadlocK(single_result):
+	#判断是否发生 deadlock 现象, 在注入 error pulse 之后, 没有出现第三个波的情况视为 deadlock
+	if not single_result['rise_timing_3']:
+		return(True)
 
 
 
@@ -305,4 +317,5 @@ elif simulation_mode == '2':
 	print('Shift current height simulation done! ---> shift_current_height_error_calculation.csv')
 '''
 
+#分析波形 .lis 文件, 判断是否出现错误
 analyze_waveform('../waveform/test.lis')
