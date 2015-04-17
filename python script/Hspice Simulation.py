@@ -68,11 +68,14 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 					if '.param currentdelay' + injection_node[1:] in line_2:
 						#comment out 注入 node 所在行的命令
 						temp_file[line_number+line_index+2] = '*' + line_2
+						#并把本行命令保存下来, 在下面的部分使用
+						currentdelay_option = line_2.split(' ')
 
 		#通过替换 .param currentdelay = **n 这行命令中的 ** 来定义不同的 injection timing
 		for line_number, line in enumerate(temp_file):
 			if '.TRAN 1p simtime' in line and '*' not in line:
-				temp_file[line_number+1] = re.sub('\s\d+\w\s', str(injection_timing) + 'n', temp_file[line_number+1])
+				currentdelay_option[3] = str(injection_timing) + 'n'
+				temp_file[line_number+1] = ' '.join(currentdelay_option)
 
 		#替换 .MEASURE command 中的有关 injection node 的参数部分
 		for line_number, line in enumerate(temp_file):
@@ -92,9 +95,9 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 		injection_timing = round(injection_timing + 0.1, 2)
 
 	#调用 input_file 文件夹中的每个 sp 文件进行一次 hspice 模拟, 输出文件的文件名与输入文件保持一致并保持在 output_file 文件夹中
-	#for input_file in sorted(glob.glob('./input_file/*.sp')):
+	for input_file in sorted(glob.glob('./input_file/' + injection_node + '*.sp')):
 		#进行 Hspice Simulation
-	#	os.system('hspice64 -hpp -mt 4 -i ' + input_file + ' -o output_file/' + input_file[-12:-3] + '.lis')
+		os.system('hspice64 -hpp -mt 4 -i ' + input_file + ' -o output_file/' + input_file[-12:-3] + '.lis')
 
 
 def analyze_waveform(lis_file):
@@ -179,16 +182,16 @@ for line in CSV_file:
 print('input_data')
 print(input_data)
 
+#'''
 #进行模拟之前, 清空 input_file 和 output_file 文件夹中的所有文件
 for file in glob.glob('./input_file/*'):
 	os.remove(file)
 for file in glob.glob('./output_file/*'):
 	os.remove(file)
 
-#'''
+
 ########## 进行 hspice simulation ##########
 for data in input_data:
-	print('hspice_simulation')
 	hspice_simulation(data[0], data[1], data[2], data[3], data[4], input_file)
 
 #读取 output_file 文件夹中每个 .lis 文件并对其中的参数进行抽取和统计, 以便判断是否出现错误波形
@@ -211,26 +214,38 @@ result_file.close()
 result_file = open('result.txt', 'r+')
 result = result_file.readlines()
 
-number_of_simulation = len(result)
-number_of_deadlock = 0
-number_of_normal = 0
-number_of_transient_pulse = 0
+result_file.write('\n\nData Analysis\n')
 
-for line in result:
-	single_result = line.split('   ', 1)
-	print('single_result', single_result)	
-	if single_result[1].strip('\n') == 'normal':
-		number_of_normal += 1
-	elif single_result[1].strip('\n') == 'deadlock':
-		number_of_deadlock += 1
-	elif single_result[1].strip('\n') == 'transient pulse':
-		number_of_transient_pulse += 1		
 
-result_file.write('\n\nData Analysis \n')
-result_file.write('number_of_simulation : %s \n' %number_of_simulation)
-result_file.write('number_of_normal : %s \n' %number_of_normal)
-result_file.write('number_of_deadlock : %s \n' %number_of_deadlock)
-result_file.write('number_of_transient_pulse : %s \n' %number_of_transient_pulse)
+for data in input_data:
+	injection_node = data[3]
+
+	#从所有的 result 中抽出关于 injection node 有关系的信息
+	injection_node_result = []
+	for line in result:
+		if injection_node in line:
+			injection_node_result.append(line)
+
+	#对于抽出的信息组成的列表进行统计
+	number_of_simulation = len(injection_node_result)
+	number_of_deadlock = 0
+	number_of_normal = 0
+	number_of_transient_pulse = 0
+
+	for part in injection_node_result:
+		single_result = part.split('   ', 1)	
+		if single_result[1].strip('\n') == 'normal':
+			number_of_normal += 1
+		elif single_result[1].strip('\n') == 'deadlock':
+			number_of_deadlock += 1
+		elif single_result[1].strip('\n') == 'transient pulse':
+			number_of_transient_pulse += 1		
+
+	result_file.write('injection node : ' + injection_node + '  ' + 'injection timing : ' + data[0] + '--' + data[1] +'ns' + '\n')
+	result_file.write('number of simulation : %s \n' %number_of_simulation)
+	result_file.write('number of normal : %s \n' %number_of_normal)
+	result_file.write('number of deadlock : %s \n' %number_of_deadlock)
+	result_file.write('number of transient_pulse : %s \n\n' %number_of_transient_pulse)
 
 
 #程序结束时间
@@ -239,4 +254,3 @@ result_file.write('time used(s) : %s' %(finish_time - start_time))
 
 
 result_file.close()
-

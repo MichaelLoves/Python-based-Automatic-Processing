@@ -1,0 +1,16 @@
+
+
+Data Analysis 
+injection node : i69  injection timing : 137--137.5ns
+number of simulation : 1 
+number of normal : 0 
+number of deadlock : 1 
+number of transient_pulse : 0 
+
+injection node : i70  injection timing : 137.5--138ns
+number of simulation : 1 
+number of normal : 0 
+number of deadlock : 1 
+number of transient_pulse : 0 
+
+time used(s) : 0.000275135040283
