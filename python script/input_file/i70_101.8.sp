@@ -11,11 +11,11 @@
 .param vdd = 1.8
 
 .TRAN 1p simtime
-.param currentdelay69 = 100n   ***N_and_3
+.param currentdelay70 = 101.8n   ***N_nand_3
 .param currentheight = -4000e-6   * 4000e-6   ***100e-6 = 0.1mA  
 
 *** 输出error pulse的注入时间
-.MEASURE TRAN error_pulse_injection_timing PARAM=currentdelay69
+.MEASURE TRAN error_pulse_injection_timing PARAM=currentdelay70
 
 *** 测量信号 n_and_3, n_and_4, cd_4 波形宽度 pulse_width (OK)
 .MEASURE TRAN n_and_3_pulse_width TRIG V(n_and_3) VAL=0.1 RISE=5 TARG V(n_and_3) VAL=0.1 FALL=5
@@ -40,24 +40,24 @@
 
 *** 判断deadlock
 *** 测量注入pulse_width的timing的前面最近的一个上升点
-.MEASURE TRAN n_and_3_rise_timing_before_pulse WHEN V(n_and_3)=0.1 RISE=LAST TO=currentdelay69
-.MEASURE TRAN n_and_4_rise_timing_before_pulse WHEN V(n_and_4)=0.1 RISE=LAST TO=currentdelay69
-.MEASURE TRAN cd_4_rise_timing_before_pulse WHEN V(cd_4)=0.1 CROSS=LAST TO=currentdelay69
+.MEASURE TRAN n_and_3_rise_timing_before_pulse WHEN V(n_and_3)=0.1 RISE=LAST TO=currentdelay70
+.MEASURE TRAN n_and_4_rise_timing_before_pulse WHEN V(n_and_4)=0.1 RISE=LAST TO=currentdelay70
+.MEASURE TRAN cd_4_rise_timing_before_pulse WHEN V(cd_4)=0.1 CROSS=LAST TO=currentdelay70
 
 
 *** 注入 error pulse 之后 第一, 二， 三次电压的 rise 和 fall 的 timing
 *** 若只是第一次有确切的时间， 第二次和第三次均为 failed(null)则说明出现了 deadlock 错误
-.MEASURE TRAN n_and_3_rise_timing_1 WHEN V(n_and_3)=0.1 RISE=1 FROM=currentdelay69
-.MEASURE TRAN n_and_3_fall_timing_1 WHEN V(n_and_3)=0.1 FALL=1 FROM=currentdelay69
-.MEASURE TRAN n_and_3_rise_timing_2 WHEN V(n_and_3)=0.1 RISE=2 FROM=currentdelay69
-.MEASURE TRAN n_and_3_fall_timing_2 WHEN V(n_and_3)=0.1 FALL=2 FROM=currentdelay69
-.MEASURE TRAN n_and_3_rise_timing_3 WHEN V(n_and_3)=0.1 RISE=3 FROM=currentdelay69
-.MEASURE TRAN n_and_3_fall_timing_3 WHEN V(n_and_3)=0.1 FALL=3 FROM=currentdelay69
+.MEASURE TRAN n_and_3_rise_timing_1 WHEN V(n_and_3)=0.1 RISE=1 FROM=currentdelay70
+.MEASURE TRAN n_and_3_fall_timing_1 WHEN V(n_and_3)=0.1 FALL=1 FROM=currentdelay70
+.MEASURE TRAN n_and_3_rise_timing_2 WHEN V(n_and_3)=0.1 RISE=2 FROM=currentdelay70
+.MEASURE TRAN n_and_3_fall_timing_2 WHEN V(n_and_3)=0.1 FALL=2 FROM=currentdelay70
+.MEASURE TRAN n_and_3_rise_timing_3 WHEN V(n_and_3)=0.1 RISE=3 FROM=currentdelay70
+.MEASURE TRAN n_and_3_fall_timing_3 WHEN V(n_and_3)=0.1 FALL=3 FROM=currentdelay70
 
-.MEASURE TRAN cd_4_rise_timing_1 WHEN V(cd_4)=0.05 RISE=1 FROM=currentdelay69
-.MEASURE TRAN cd_4_fall_timing_1 WHEN V(cd_4)=0.05 FALL=1 FROM=currentdelay69
-.MEASURE TRAN cd_4_rise_timing_2 WHEN V(cd_4)=0.05 RISE=2 FROM=currentdelay69
-.MEASURE TRAN cd_4_fall_timing_2 WHEN V(cd_4)=0.05 FALL=2 FROM=currentdelay69
+.MEASURE TRAN cd_4_rise_timing_1 WHEN V(cd_4)=0.05 RISE=1 FROM=currentdelay70
+.MEASURE TRAN cd_4_fall_timing_1 WHEN V(cd_4)=0.05 FALL=1 FROM=currentdelay70
+.MEASURE TRAN cd_4_rise_timing_2 WHEN V(cd_4)=0.05 RISE=2 FROM=currentdelay70
+.MEASURE TRAN cd_4_fall_timing_2 WHEN V(cd_4)=0.05 FALL=2 FROM=currentdelay70
 
 
 *** 判断正常波形
@@ -66,14 +66,14 @@
 .MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period2_2 PARAM='n_and_3_fall_timing_3 - n_and_3_rise_timing_2'
 .MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_1 PARAM='n_and_3_fall_timing_2 - n_and_3_rise_timing_2'
 .MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_2 PARAM='n_and_3_fall_timing_3 - n_and_3_rise_timing_2'
-.MEASURE TRAN n_and_3_max_vol_after_pulse_1 MAX V(n_and_3) FROM=currentdelay69 TO='currentdelay69 + n_and_3_period'
-.MEASURE TRAN n_and_3_max_vol_after_pulse_2 MAX V(n_and_3) FROM='currentdelay69 + n_and_3_period' TO='currentdelay69 + 2*n_and_3_period'
+.MEASURE TRAN n_and_3_max_vol_after_pulse_1 MAX V(n_and_3) FROM=currentdelay70 TO='currentdelay70 + n_and_3_period'
+.MEASURE TRAN n_and_3_max_vol_after_pulse_2 MAX V(n_and_3) FROM='currentdelay70 + n_and_3_period' TO='currentdelay70 + 2*n_and_3_period'
 
 *** 顺便判断一下CD_4的波形是否正常
-.MEASURE TRAN cd_4_rise_timing_after_pulse_1 WHEN V(cd_4)=0.05 RISE=1 FROM=currentdelay69
-.MEASURE TRAN cd_4_rise_timing_after_pulse_2 WHEN V(cd_4)=0.05 RISE=2 FROM=currentdelay69
-.MEASURE TRAN cd_4_fall_timing_after_pulse_1 WHEN V(cd_4)=0.05 FALL=1 FROM=currentdelay69
-.MEASURE TRAN cd_4_fall_timing_after_pulse_2 WHEN V(cd_4)=0.05 FALL=2 FROM=currentdelay69
+.MEASURE TRAN cd_4_rise_timing_after_pulse_1 WHEN V(cd_4)=0.05 RISE=1 FROM=currentdelay70
+.MEASURE TRAN cd_4_rise_timing_after_pulse_2 WHEN V(cd_4)=0.05 RISE=2 FROM=currentdelay70
+.MEASURE TRAN cd_4_fall_timing_after_pulse_1 WHEN V(cd_4)=0.05 FALL=1 FROM=currentdelay70
+.MEASURE TRAN cd_4_fall_timing_after_pulse_2 WHEN V(cd_4)=0.05 FALL=2 FROM=currentdelay70
 .MEASURE TRAN cd_4_pulse_width_after_pulse_1 PARAM='cd_4_fall_timing_1 - cd_4_rise_timing_1'
 .MEASURE TRAN cd_4_pulse_width_after_pulse_2 PARAM='cd_4_fall_timing_2 - cd_4_rise_timing_1'
 
@@ -83,18 +83,18 @@
 *** 情况2 : n_and_3和n_and_4在注入后的一个周期内没有波峰，但n_nand_3和n_nand_4有波峰
 *** 需要参数 : n_and_3, n_and_4, n_nand_3, n_nand_4在注入之后的pulse_width和max_vol
 *** n_and_3的pulse width 和 max vol
-.MEASURE TRAN n_and_3_rise_to_vdd_timing_after_pulse WHEN V(n_and_3)='vdd*0.8' FROM=currentdelay69
+.MEASURE TRAN n_and_3_rise_to_vdd_timing_after_pulse WHEN V(n_and_3)='vdd*0.8' FROM=currentdelay70
 *** n_and_4的pulse width 和 max vol
-.MEASURE TRAN n_and_4_rise_timing_1 WHEN V(n_and_4)=0.05 RISE=1 FROM=currentdelay69
-.MEASURE TRAN n_and_4_fall_timing_1 WHEN V(n_and_4)=0.05 FALL=1 FROM=currentdelay69
+.MEASURE TRAN n_and_4_rise_timing_1 WHEN V(n_and_4)=0.05 RISE=1 FROM=currentdelay70
+.MEASURE TRAN n_and_4_fall_timing_1 WHEN V(n_and_4)=0.05 FALL=1 FROM=currentdelay70
 .MEASURE TRAN n_and_4_pulse_width_after_pulse PARAM='n_and_4_fall_timing_1 - n_and_4_rise_timing_1'
-.MEASURE TRAN n_and_4_max_vol_after_pulse MAX V(n_and_4) FROM=currentdelay69 TO='currentdelay69 + n_and_4_period'
-.MEASURE TRAN n_and_4_rise_to_vdd_timing_after_pulse WHEN V(n_and_4)='vdd*0.8' FROM=currentdelay69
+.MEASURE TRAN n_and_4_max_vol_after_pulse MAX V(n_and_4) FROM=currentdelay70 TO='currentdelay70 + n_and_4_period'
+.MEASURE TRAN n_and_4_rise_to_vdd_timing_after_pulse WHEN V(n_and_4)='vdd*0.8' FROM=currentdelay70
 
 *** n_nand_3的max vol
-.MEASURE TRAN n_nand_3_max_vol_after_pulse MAX V(n_nand_3) FROM=currentdelay69 TO='currentdelay69 + n_and_4_period'
+.MEASURE TRAN n_nand_3_max_vol_after_pulse MAX V(n_nand_3) FROM=currentdelay70 TO='currentdelay70 + n_and_4_period'
 *** n_nand_4的max vol
-.MEASURE TRAN n_nand_4_max_vol_after_pulse MAX V(n_nand_4) FROM=currentdelay69 TO='currentdelay69 + n_and_4_period'
+.MEASURE TRAN n_nand_4_max_vol_after_pulse MAX V(n_nand_4) FROM=currentdelay70 TO='currentdelay70 + n_and_4_period'
 
 
 
@@ -402,7 +402,7 @@ xi80 gnd p_and_4 net0280 vdd inv2
 
 .param currentduration = 0.1e-9  ***0.1ns
 
-******************** injection timing delay ********************
+*************** injection timing delay ***************
 .param currentdelay108 = simtime   ***p pipeline internal node n8
 .param currentdelay107 = simtime   ***p pipeline internal node n7
 .param currentdelay106 = simtime   ***p pipeline internal node n6
@@ -419,10 +419,10 @@ xi80 gnd p_and_4 net0280 vdd inv2
 .param currentdelay92 = simtime   ***n pipeline internal node n2
 .param currentdelay73 = simtime   ***CD_3
 .param currentdelay72 = simtime   ***cP_nand_3
-.param currentdelay71 = simtime   ***P_and_3
+*.param currentdelay70 = simtime   ***N_nand_3
 .param currentdelay70 = simtime   ***N_nand_3
 .param currentdelay69 = simtime   ***N_and_3
-******************** injection timing delay ********************
+*************** injection timing delay ***************
 
 
 

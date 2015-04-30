@@ -4,7 +4,7 @@ import math, time
 from copy import deepcopy
 
 #电源电压
-VDD = 1.8
+VDD = float(1.8)
 
 #查找一个元素的所有位置
 def find_index(arr, search):
@@ -20,34 +20,103 @@ def extract_data(line):
 	if 'e' in raw_data:
 		data = float(raw_data.split('e')[0])/10**float(raw_data.split('e')[1].strip('-'))
 	elif raw_data:
-		data = raw_data
+		#把原本的 string 类型转换为 float 类型, 好方便于之后的数值比较
+		data = float(raw_data)
 	else:
+		#若在 .lis 文件中的结果为 failed (null)
 		data = ''
 	return(data_name, data)
 
+
 def is_Normal(single_result):
-	#判断是否为正常波形。在 injection timing 的前一个 rise 开始之后的一个， 两个， 三个周期之内最大的电压都达到VDD则视为正常波形
-	max_vol_1 = float(single_result['max_vol_1'])
-	max_vol_2 = float(single_result['max_vol_2'])
-	max_vol_3 = float(single_result['max_vol_3'])
+	#判断是否为正常波形
+	#在n_and_3_timing3之后两个周期内的pulse_width与之前的测量结果n_and_3_pulse_width大致相同 且最大电压约为VDD
+	#且CD_4的波形也为正常
 
-	if max_vol_1 + max_vol_2 + max_vol_3 >= VDD*3:
-		return(True)
-
-def is_Transient_pulse(single_result):
-	#判断是否发生 transient pulse 现象. 在 normal 的基础上, 若 fall_timing_before_pulse 迟于
-	#rise_timing_before_pulse, 则视为 transient pulse 出现
-	if single_result['fall_timing_before_pulse'] > single_result['rise_timing_before_pulse']:
-		return(True)
+	#先确定 CD_4 的 pulse_width
+	if single_result['cd_4_pulse_width_after_pulse_1'] > 0:
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_1']
 	else:
-		return(False)
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_2']
+
+	#确定n_and_3_pulse_width_after_pulse
+	if single_result['n_and_3_pulse_width_after_pulse_in_period2_1'] > 0:
+		n_and_3_pulse_width_after_pulse_in_period2 = single_result['n_and_3_pulse_width_after_pulse_in_period2_1']
+	else:
+		n_and_3_pulse_width_after_pulse_in_period2 = single_result['n_and_3_pulse_width_after_pulse_in_period2_2']
+		
+
+	if single_result['n_and_3_pulse_width_after_pulse_in_period3_1'] > 0:
+		n_and_3_pulse_width_after_pulse_in_period3 = single_result['n_and_3_pulse_width_after_pulse_in_period3_1']
+	else:
+		n_and_3_pulse_width_after_pulse_in_period3 = single_result['n_and_3_pulse_width_after_pulse_in_period3_2']
+
+
+	#'''
+	print(single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period2)
+	print(n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.1)
+	print(single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period3)
+	print(n_and_3_pulse_width_after_pulse_in_period3 < single_result['n_and_3_pulse_width']*1.1)
+	print(VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_1'])
+	print(single_result['n_and_3_max_vol_after_pulse_1'] < VDD*1.1)
+	print(VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_2'])
+	print(single_result['n_and_3_max_vol_after_pulse_2'] < VDD*1.1)
+	print(single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse)
+	print(cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width']*1.3)
+	print()
+	#'''	
+
+	if single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period2 and \
+	n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.1 and \
+	single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period3 and \
+	n_and_3_pulse_width_after_pulse_in_period3 < single_result['n_and_3_pulse_width']*1.1 and \
+	VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_1'] and \
+	single_result['n_and_3_max_vol_after_pulse_1'] < VDD*1.1 and \
+	VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_2'] and \
+	single_result['n_and_3_max_vol_after_pulse_2'] < VDD*1.1 and \
+	single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse and \
+	cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width']*1.3 and \
+	(single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 or \
+	single_result['n_nand_4_max_vol_after_pulse'] < VDD*0.5):
+		return(True)
 
 def is_DeadlocK(single_result):
 	#判断是否发生 deadlock 现象, 在注入 error pulse 之后, 没有出现第三个波的情况视为 deadlock
-	if not single_result['rise_timing_3']:
+	if not single_result['n_and_3_rise_timing_3']:
 		return(True)
 	else:
 		return(False)
+
+def is_11_error(single_result):
+	#在 normal operation 的情况下, n_nand_3 和 n_nand_4的输出为1
+	#设置阈值为vdd*0.5的根据在Evernote笔记中有所记录
+	if single_result['n_nand_3_max_vol_after_pulse'] > VDD*0.5 and \
+	single_result['n_nand_4_max_vol_after_pulse'] > VDD*0.5 and \
+	single_result['n_and_3_max_vol_after_pulse_1'] > VDD*0.5 and \
+	single_result['n_and_4_max_vol_after_pulse'] > VDD*0.5:
+		return(True)
+
+def is_wrong_output(single_result):
+	#在 n_and_3 和 n_and_4 为0的情况下, n_nand_3 和 n_nand_4 的输出为1, 即发生了出力的反转
+	#波形特征 : n_and_3和 n_and_4的第一次 rise_timing 不在 currentdelay69+period 范围之内
+ 	#而 n_nand_3和 n_nand_4在 currentdelay+period 范围内有波峰 
+
+	#'''
+	print(single_result['n_nand_3_max_vol_after_pulse'] > VDD*0.5)
+	print(single_result['n_nand_4_max_vol_after_pulse'] > VDD*0.5)
+ 	print(single_result['n_and_3_rise_to_vdd_timing_after_pulse'] > single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'])
+ 	print(single_result['n_and_4_rise_to_vdd_timing_after_pulse'] > single_result['error_pulse_injection_timing'] + single_result['n_and_4_period'])
+	#'''
+
+ 	if single_result['n_nand_3_max_vol_after_pulse'] > VDD*0.5 and single_result['n_nand_4_max_vol_after_pulse'] > VDD*0.5 and \
+ 	single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
+ 	single_result['n_and_4_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_4_period'] and \
+	not single_result['n_nand_3_max_vol_after_pulse'] and \
+	not single_result['n_nand_4_max_vol_after_pulse']:
+ 		return(False)
+	else:
+		return(True)	
+
 
 def hspice_simulation(start_timing, end_timing, current_height, injection_node, output_node, input_file):
 
@@ -60,9 +129,10 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 		temp_file = read_file.readlines()
 
 		#在原 sp 文件中查找定义 currentdelay 的命令行, 默认为 .param currentduration 下面的 n 行之内, n 取决于注入 node 的个数
+		line_index = find_index_2(temp_file, 'injection timing delay')
 		for line_number, line in enumerate(temp_file):
 			if '.param currentduration' in line:
-				for line_index, line_2 in enumerate(temp_file[line_number+2 : line_number+7]):
+				for line_index, line_2 in enumerate(temp_file[line_index[0]+1 : line_index[1]]):
 					#初始化原 sp 文件中的命令行, 去掉之前行开头可能有的'*'符号
 					line_2.strip('*')
 					if '.param currentdelay' + injection_node[1:] in line_2:
@@ -80,7 +150,15 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 		#替换 .MEASURE command 中的有关 injection node 的参数部分
 		for line_number, line in enumerate(temp_file):
 			if '.MEASURE' in line and 'currentdelay' in line:
-				temp_file[line_number] = re.sub('\d{2}', injection_node[1:], line)
+				measure_command = line.split(' ')
+				#print(measure_command)
+				for part_num, part in enumerate(measure_command):
+					if 'currentdelay' in part:
+						old_part = part.split('currentdelay')
+						temp = injection_node[1:] + old_part[-1][2:]
+						new_part = old_part[0] + 'currentdelay' + temp
+						measure_command[part_num] = new_part
+				temp_file[line_number] = ' '.join(measure_command)
 
 
 		#输出入力文件时, 以 injection node 和 injection timing 作为文件名保存
@@ -95,12 +173,13 @@ def hspice_simulation(start_timing, end_timing, current_height, injection_node, 
 		injection_timing = round(injection_timing + 0.1, 2)
 
 	#调用 input_file 文件夹中的每个 sp 文件进行一次 hspice 模拟, 输出文件的文件名与输入文件保持一致并保持在 output_file 文件夹中
-	for input_file in sorted(glob.glob('./input_file/' + injection_node + '*.sp')):
+	#for input_file in sorted(glob.glob('./input_file/' + injection_node + '*.sp')):
 		#进行 Hspice Simulation
-		os.system('hspice64 -hpp -mt 4 -i ' + input_file + ' -o output_file/' + input_file[-12:-3] + '.lis')
-
+	#	os.system('hspice64 -hpp -mt 4 -i ' + input_file + ' -o output_file/' + input_file[-12:-3] + '.lis')
+		
 
 def analyze_waveform(lis_file):
+	#print('analyze waveform : lis file', lis_file)
 	file = lis_file.readlines()
 	result_list = []
 
@@ -130,12 +209,13 @@ def analyze_waveform(lis_file):
 
 	#统计是否出现 deadlock
 	if is_Normal(single_result_dict):
-		if is_Transient_pulse(single_result_dict):
-			return('transient pulse')
-		else:
-			return('normal')
+		return('normal')
 	elif is_DeadlocK(single_result_dict):
 		return('deadlock')
+	elif is_11_error(single_result_dict):
+		return('11 error')
+	elif is_wrong_output(single_result_dict):
+		return('wrong output')
 	else:
 		return('unknown')
 
@@ -182,17 +262,18 @@ for line in CSV_file:
 print('input_data')
 print(input_data)
 
-#'''
+'''
 #进行模拟之前, 清空 input_file 和 output_file 文件夹中的所有文件
 for file in glob.glob('./input_file/*'):
 	os.remove(file)
 for file in glob.glob('./output_file/*'):
 	os.remove(file)
-
+'''
 
 ########## 进行 hspice simulation ##########
 for data in input_data:
 	hspice_simulation(data[0], data[1], data[2], data[3], data[4], input_file)
+#'''
 
 #读取 output_file 文件夹中每个 .lis 文件并对其中的参数进行抽取和统计, 以便判断是否出现错误波形
 #统计结果保存在 result.txt 文件之中
@@ -230,7 +311,9 @@ for data in input_data:
 	number_of_simulation = len(injection_node_result)
 	number_of_deadlock = 0
 	number_of_normal = 0
-	number_of_transient_pulse = 0
+	number_of_11_error = 0
+	number_of_wrong_output = 0
+	number_of_unknown = 0
 
 	for part in injection_node_result:
 		single_result = part.split('   ', 1)	
@@ -238,14 +321,20 @@ for data in input_data:
 			number_of_normal += 1
 		elif single_result[1].strip('\n') == 'deadlock':
 			number_of_deadlock += 1
-		elif single_result[1].strip('\n') == 'transient pulse':
-			number_of_transient_pulse += 1		
+		elif single_result[1].strip('\n') == '11 error':
+			number_of_11_error += 1
+		elif single_result[1].strip('\n') == 'wrong output':
+			number_of_wrong_output += 1
+		else:
+			number_of_unknown += 1	
 
 	result_file.write('injection node : ' + injection_node + '  ' + 'injection timing : ' + data[0] + '--' + data[1] +'ns' + '\n')
 	result_file.write('number of simulation : %s \n' %number_of_simulation)
 	result_file.write('number of normal : %s \n' %number_of_normal)
 	result_file.write('number of deadlock : %s \n' %number_of_deadlock)
-	result_file.write('number of transient_pulse : %s \n\n' %number_of_transient_pulse)
+	result_file.write('number of 11 error : %s \n' %number_of_11_error)
+	result_file.write('number of wrong output: %s \n' %number_of_wrong_output)
+	result_file.write('number of unknown : %s \n\n' %number_of_unknown)
 
 
 #程序结束时间
