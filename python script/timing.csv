@@ -1,1 +1,1 @@
-"start_timing;end_timing;current_height;injection_node;output_node""100;102;-4000;i70;n_nand_3"
+"start_timing;end_timing;current_height;injection_node;output_node""100;102;-4000;n1;n_and_3""100;101;-4000;n2;n_nand_3"

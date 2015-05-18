@@ -4,27 +4,26 @@
 .OPTION MTTHRESH=10               $ Multi-core operation if >10 transitor
 .OPTION PROBE                    $ Nanosim requires this line
 .OPTION INGOLD                  $ 指定输出结果的显示格式
-.PROBE TRAN V(*) I(i_n1) I(i_n2) I(i_n3) I(i_n4) I(i_n5) I(i_n6) I(i_n7) I(i_n8) I(i_n9) I(i_p1) I(i_p2) I(i_p3) I(i_p4) I(i_p5) I(i_p6) I(i_p7) I(i_p8) I(i_p9) I(i_cd)       $ Nanosim requires to specify output node
+.PROBE V(*) I(i_n1) I(i_n2) I(i_n3) I(i_n4) I(i_n5) I(i_n6) I(i_n7) I(i_n8) I(i_n9) I(i_p1) I(i_p2) I(i_p3) I(i_p4) I(i_p5) I(i_p6) I(i_p7) I(i_p8) I(i_p9) I(i_cd)       $ Nanosim requires to specify output node
 
 
 .TEMP = 27                    
 .param vdd = 1.8
 
 .TRAN 1p simtime
-.param injection_timing_n1 = 100n   ***N_and_3
+.param injection_timing_n2 = 100.0n   ***n pipeline internal node n2
 .param current_height = -4000e-6   * 4000e-6   ***100e-6 = 0.1mA  
 
 *** 输出error pulse的注入时间
-.MEASURE TRAN error_pulse_injection_timing PARAM=injection_timing_n1
+.MEASURE TRAN error_pulse_injection_timing PARAM=injection_timing_n2
 
-*** 测量信号 n_and_3, n_and_4, cd_3, cd_4 波形宽度 pulse_width (OK)
+*** 测量信号 n_and_3, n_and_4, cd_4 波形宽度 pulse_width (OK)
 .MEASURE TRAN n_and_3_pulse_width TRIG V(n_and_3) VAL=0.1 RISE=5 TARG V(n_and_3) VAL=0.1 FALL=5
 .MEASURE TRAN n_and_4_pulse_width TRIG V(n_and_4) VAL=0.1 RISE=5 TARG V(n_and_4) VAL=0.1 FALL=5
-.MEASURE TRAN cd_3_pulse_width TRIG V(cd_3) VAL=0.1 FALL=5 TARG V(cd_3) VAL=0.1 RISE=5 
 .MEASURE TRAN cd_4_pulse_width TRIG V(cd_4) VAL=0.1 RISE=5 TARG V(cd_4) VAL=0.1 FALL=5
 
 
-*** 测量周期 n_and_3, n_and_4, cd_3, cd_4 的周期 period (OK)
+*** 测量周期 n_and_3, n_and_4, cd_4 的周期 period (OK)
 *** 用第二次到达VDD的timing 减去 第一次到达VDD的timing 的时间差作为周期
 .MEASURE TRAN n_and_3_timing1 WHEN V(n_and_3)='vdd/2' RISE=3
 .MEASURE TRAN n_and_3_timing2 WHEN V(n_and_3)='vdd/2' RISE=4
@@ -34,10 +33,6 @@
 .MEASURE TRAN n_and_4_timing2 WHEN V(n_and_4)='vdd/2' RISE=4
 .MEASURE TRAN n_and_4_period PARAM='n_and_4_timing2-n_and_4_timing1'
 
-.MEASURE TRAN cd_3_timing1 WHEN V(cd_3)='vdd/2' RISE=3
-.MEASURE TRAN cd_3_timing2 WHEN V(cd_3)='vdd/2' RISE=4
-.MEASURE TRAN cd_3_period PARAM='cd_3_timing2-cd_3_timing1'
-
 .MEASURE TRAN cd_4_timing1 WHEN V(cd_4)='vdd/2' RISE=3
 .MEASURE TRAN cd_4_timing2 WHEN V(cd_4)='vdd/2' RISE=4
 .MEASURE TRAN cd_4_period PARAM='cd_4_timing2-cd_4_timing1'
@@ -45,81 +40,61 @@
 
 *** 判断deadlock
 *** 测量注入pulse_width的timing的前面最近的一个上升点
-.MEASURE TRAN n_and_3_rise_timing_before_pulse WHEN V(n_and_3)=0.1 RISE=LAST TO=injection_timing_n1
-.MEASURE TRAN n_and_4_rise_timing_before_pulse WHEN V(n_and_4)=0.1 RISE=LAST TO=injection_timing_n1
-.MEASURE TRAN cd_4_rise_timing_before_pulse WHEN V(cd_4)=0.1 CROSS=LAST TO=injection_timing_n1
+.MEASURE TRAN n_and_3_rise_timing_before_pulse WHEN V(n_and_3)=0.1 RISE=LAST TO=injection_timing_n2
+.MEASURE TRAN n_and_4_rise_timing_before_pulse WHEN V(n_and_4)=0.1 RISE=LAST TO=injection_timing_n2
+.MEASURE TRAN cd_4_rise_timing_before_pulse WHEN V(cd_4)=0.1 CROSS=LAST TO=injection_timing_n2
 
 
 *** 注入 error pulse 之后 第一, 二， 三次电压的 rise 和 fall 的 timing
 *** 若只是第一次有确切的时间， 第二次和第三次均为 failed(null)则说明出现了 deadlock 错误
-.MEASURE TRAN n_and_3_rise_timing_1 WHEN V(n_and_3)=0.1 RISE=1 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_fall_timing_1 WHEN V(n_and_3)=0.1 FALL=1 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_rise_timing_2 WHEN V(n_and_3)=0.1 RISE=2 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_fall_timing_2 WHEN V(n_and_3)=0.1 FALL=2 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_rise_timing_3 WHEN V(n_and_3)=0.1 RISE=3 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_fall_timing_3 WHEN V(n_and_3)=0.1 FALL=3 FROM=injection_timing_n1
-.MEASURE TRAN n_and_3_fall_timing_4 WHEN V(n_and_3)=0.1 FALL=4 FROM=injection_timing_n1
+.MEASURE TRAN n_and_3_rise_timing_1 WHEN V(n_and_3)=0.1 RISE=1 FROM=injection_timing_n2
+.MEASURE TRAN n_and_3_fall_timing_1 WHEN V(n_and_3)=0.1 FALL=1 FROM=injection_timing_n2
+.MEASURE TRAN n_and_3_rise_timing_2 WHEN V(n_and_3)=0.1 RISE=2 FROM=injection_timing_n2
+.MEASURE TRAN n_and_3_fall_timing_2 WHEN V(n_and_3)=0.1 FALL=2 FROM=injection_timing_n2
+.MEASURE TRAN n_and_3_rise_timing_3 WHEN V(n_and_3)=0.1 RISE=3 FROM=injection_timing_n2
+.MEASURE TRAN n_and_3_fall_timing_3 WHEN V(n_and_3)=0.1 FALL=3 FROM=injection_timing_n2
 
-
-.MEASURE TRAN cd_4_rise_timing_1 WHEN V(cd_4)=0.05 RISE=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_fall_timing_1 WHEN V(cd_4)=0.05 FALL=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_rise_timing_2 WHEN V(cd_4)=0.05 RISE=2 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_fall_timing_2 WHEN V(cd_4)=0.05 FALL=2 FROM=injection_timing_n1
+.MEASURE TRAN cd_4_rise_timing_1 WHEN V(cd_4)=0.05 RISE=1 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_fall_timing_1 WHEN V(cd_4)=0.05 FALL=1 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_rise_timing_2 WHEN V(cd_4)=0.05 RISE=2 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_fall_timing_2 WHEN V(cd_4)=0.05 FALL=2 FROM=injection_timing_n2
 
 
 *** 判断正常波形
 *** 在injection timing之后两个周期内的pulse_width与之前的测量结果n_and_3_pulse_width大致相同 且最大电压约为VDD
-.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period1_1 PARAM='n_and_3_fall_timing_1 - n_and_3_rise_timing_1'
-.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period1_2 PARAM='n_and_3_fall_timing_2 - n_and_3_rise_timing_1'
-
 .MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period2_1 PARAM='n_and_3_fall_timing_2 - n_and_3_rise_timing_2'
 .MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period2_2 PARAM='n_and_3_fall_timing_3 - n_and_3_rise_timing_2'
+.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_1 PARAM='n_and_3_fall_timing_2 - n_and_3_rise_timing_2'
+.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_2 PARAM='n_and_3_fall_timing_3 - n_and_3_rise_timing_2'
+.MEASURE TRAN n_and_3_max_vol_after_pulse_1 MAX V(n_and_3) FROM=injection_timing_n2 TO='injection_timing_n2 + n_and_3_period'
+.MEASURE TRAN n_and_3_max_vol_after_pulse_2 MAX V(n_and_3) FROM='injection_timing_n2 + n_and_3_period' TO='injection_timing_n2 + 2*n_and_3_period'
 
-.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_1 PARAM='n_and_3_fall_timing_3 - n_and_3_rise_timing_3'
-.MEASURE TRAN n_and_3_pulse_width_after_pulse_in_period3_2 PARAM='n_and_3_fall_timing_4 - n_and_3_rise_timing_3'
+*** 顺便判断一下CD_4的波形是否正常
+.MEASURE TRAN cd_4_rise_timing_after_pulse_1 WHEN V(cd_4)=0.05 RISE=1 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_rise_timing_after_pulse_2 WHEN V(cd_4)=0.05 RISE=2 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_fall_timing_after_pulse_1 WHEN V(cd_4)=0.05 FALL=1 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_fall_timing_after_pulse_2 WHEN V(cd_4)=0.05 FALL=2 FROM=injection_timing_n2
+.MEASURE TRAN cd_4_pulse_width_after_pulse_1 PARAM='cd_4_fall_timing_1 - cd_4_rise_timing_1'
+.MEASURE TRAN cd_4_pulse_width_after_pulse_2 PARAM='cd_4_fall_timing_2 - cd_4_rise_timing_1'
 
-*** injection timing之后三个周期内n_and_3的最大电压
-.MEASURE TRAN n_and_3_max_vol_after_pulse_in_period1 MAX V(n_and_3) FROM=injection_timing_n1 TO='injection_timing_n1 + n_and_3_period'
-.MEASURE TRAN n_and_3_max_vol_after_pulse_in_period2 MAX V(n_and_3) FROM='injection_timing_n1 + n_and_3_period' TO='injection_timing_n1 + 2*n_and_3_period'
-.MEASURE TRAN n_and_3_max_vol_after_pulse_in_period3 MAX V(n_and_3) FROM='injection_timing_n1 + 2*n_and_3_period' TO='injection_timing_n1 + 3*n_and_3_period'
-
-*** injection timing之后三个周期内n_and_4的最大电压
-.MEASURE TRAN n_and_4_max_vol_after_pulse_in_period1 MAX V(n_and_4) FROM=injection_timing_n1 TO='injection_timing_n1 + n_and_3_period'
-.MEASURE TRAN n_and_4_max_vol_after_pulse_in_period2 MAX V(n_and_4) FROM='injection_timing_n1 + n_and_3_period' TO='injection_timing_n1 + 2*n_and_3_period'
-.MEASURE TRAN n_and_4_max_vol_after_pulse_in_period3 MAX V(n_and_4) FROM='injection_timing_n1 + 2*n_and_3_period' TO='injection_timing_n1 + 3*n_and_3_period'
-
-*** injection timing之后一个周期内cd_3的rise_timing, fall_timing, pulse_width
-.MEASURE TRAN cd_3_rise_timing_after_pulse_1 WHEN V(cd_3)=0.1 RISE=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_3_rise_timing_after_pulse_2 WHEN V(cd_3)=0.1 RISE=2 FROM=injection_timing_n1
-.MEASURE TRAN cd_3_fall_timing_after_pulse_1 WHEN V(cd_3)=0.1 FALL=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_3_fall_timing_after_pulse_2 WHEN V(cd_3)=0.1 FALL=2 FROM=injection_timing_n1
-.MEASURE TRAN cd_3_pulse_width_after_pulse_in_period1_1 PARAM='cd_3_fall_timing_after_pulse_1 - cd_3_rise_timing_after_pulse_1'
-.MEASURE TRAN cd_3_pulse_width_after_pulse_in_period1_2 PARAM='cd_3_fall_timing_after_pulse_2 - cd_3_rise_timing_after_pulse_1'
-
-
-*** injection timing之后两个周期内cd_4的rise_timing, fall_timing, pulse_width
-.MEASURE TRAN cd_4_rise_timing_after_pulse_1 WHEN V(cd_4)=0.11 RISE=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_rise_timing_after_pulse_2 WHEN V(cd_4)=0.1 RISE=2 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_fall_timing_after_pulse_1 WHEN V(cd_4)=0.1 FALL=1 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_fall_timing_after_pulse_2 WHEN V(cd_4)=0.1 FALL=2 FROM=injection_timing_n1
-.MEASURE TRAN cd_4_pulse_width_after_pulse_in_period1_1 PARAM='cd_4_fall_timing_after_pulse_1 - cd_4_rise_timing_after_pulse_1'
-.MEASURE TRAN cd_4_pulse_width_after_pulse_in_period1_2 PARAM='cd_4_fall_timing_after_pulse_2 - cd_4_rise_timing_after_pulse_1'
 
 *** 判断“11”错误：n_nand_3也出现波峰, 并使n_nand_4也出现波峰
 *** 情况1 : n_and_3和n_and_4有波峰的情况下，n_nand_3和n_nand_4也有波峰 
 *** 情况2 : n_and_3和n_and_4在注入后的一个周期内没有波峰，但n_nand_3和n_nand_4有波峰
 *** 需要参数 : n_and_3, n_and_4, n_nand_3, n_nand_4在注入之后的pulse_width和max_vol
 *** n_and_3的pulse width 和 max vol
-.MEASURE TRAN n_and_3_rise_to_vdd_timing_after_pulse WHEN V(n_and_3)='vdd*0.8' FROM=injection_timing_n1
+.MEASURE TRAN n_and_3_rise_to_vdd_timing_after_pulse WHEN V(n_and_3)='vdd*0.8' FROM=injection_timing_n2
 *** n_and_4的pulse width 和 max vol
-.MEASURE TRAN n_and_4_rise_timing_after_pulse_1 WHEN V(n_and_4)=0.05 RISE=1 FROM=injection_timing_n1
-.MEASURE TRAN n_and_4_fall_timing_after_pulse_1 WHEN V(n_and_4)=0.05 FALL=1 FROM=injection_timing_n1
-.MEASURE TRAN n_and_4_pulse_width_after_pulse PARAM='n_and_4_fall_timing_after_pulse_1 - n_and_4_rise_timing_after_pulse_1'
-.MEASURE TRAN n_and_4_rise_to_vdd_timing_after_pulse WHEN V(n_and_4)='vdd*0.8' FROM=injection_timing_n1
+.MEASURE TRAN n_and_4_rise_timing_1 WHEN V(n_and_4)=0.05 RISE=1 FROM=injection_timing_n2
+.MEASURE TRAN n_and_4_fall_timing_1 WHEN V(n_and_4)=0.05 FALL=1 FROM=injection_timing_n2
+.MEASURE TRAN n_and_4_pulse_width_after_pulse PARAM='n_and_4_fall_timing_1 - n_and_4_rise_timing_1'
+.MEASURE TRAN n_and_4_max_vol_after_pulse MAX V(n_and_4) FROM=injection_timing_n2 TO='injection_timing_n2 + n_and_4_period'
+.MEASURE TRAN n_and_4_rise_to_vdd_timing_after_pulse WHEN V(n_and_4)='vdd*0.8' FROM=injection_timing_n2
 
-*** injection timing之后 n_nand_3和n_nand_4的max vol
-.MEASURE TRAN n_nand_3_max_vol_after_pulse MAX V(n_nand_3) FROM=injection_timing_n1 TO='injection_timing_n1 + n_and_3_period'
-.MEASURE TRAN n_nand_4_max_vol_after_pulse MAX V(n_nand_4) FROM=injection_timing_n1 TO='injection_timing_n1 + n_and_4_period'
+*** n_nand_3的max vol
+.MEASURE TRAN n_nand_3_max_vol_after_pulse MAX V(n_nand_3) FROM=injection_timing_n2 TO='injection_timing_n2 + n_and_4_period'
+*** n_nand_4的max vol
+.MEASURE TRAN n_nand_4_max_vol_after_pulse MAX V(n_nand_4) FROM=injection_timing_n2 TO='injection_timing_n2 + n_and_4_period'
 
 
 
@@ -417,7 +392,7 @@ xi80 gnd p_and_4 net0280 vdd inv2
 ******************** injection timing delay ********************
 .param injection_timing_n1 = simtime   ***n_and_3
 .param injection_timing_n9 = simtime   ***n_nand_3
-.param injection_timing_n2 = simtime   ***n pipeline internal node n2
+*.param injection_timing_n2 = simtime   ***n pipeline internal node n2
 .param injection_timing_n3 = simtime   ***n pipeline internal node n3
 .param injection_timing_n4 = simtime   ***n pipeline internal node n4
 .param injection_timing_n5 = simtime   ***n pipeline internal node n5
@@ -459,6 +434,7 @@ i_p7 gnd net245 PULSE 0 current_height injection_timing_p7 0 0 current_duration 
 i_p8 gnd net247 PULSE 0 current_height injection_timing_p8 0 0 current_duration simtime
 i_p9 gnd net239 PULSE 0 current_height injection_timing_p9 0 0 current_duration simtime
 i_cd gnd net278 PULSE 0 current_height injection_timing_cd 0 0 current_duration simtime
+i_test gnd n_and_3 PULSE 0 current_height injection_timing_test 0 0 current_duration simtime
 ******************** injection node ********************
 
 

@@ -34,16 +34,16 @@ def is_Normal(single_result):
 	#且cd_3, cd_4的波形也为正常
 
 	#确定 cd_3 的 pulse_width
-	if single_result['cd_3_pulse_width_after_pulse_in_period1_1'] > 0:
-		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_1']
+	if single_result['cd_3_pulse_width_after_pulse_1'] > 0:
+		cd_3_pulse_width_after_pulse = single_result['cd_3_pulse_width_after_pulse_1']
 	else:
-		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_2']
+		cd_3_pulse_width_after_pulse = single_result['cd_3_pulse_width_after_pulse_2']
 
 	#确定 cd_4 的 pulse_width
-	if single_result['cd_4_pulse_width_after_pulse_in_period1_1'] > 0:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_1']
+	if single_result['cd_4_pulse_width_after_pulse_1'] > 0:
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_1']
 	else:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_2']
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_2']
 
 	#确定在injection timing之后三个周内各自的n_and_3_pulse_width_after_pulse
 	if single_result['n_and_3_pulse_width_after_pulse_in_period1_1'] > 0:
@@ -65,24 +65,26 @@ def is_Normal(single_result):
 	'''
 	print('is normal')
 	print('1', single_result['n_and_3_rise_timing_1'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] ) 
-	print('2', single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
-	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 )
-	print('3', single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period2 and \
-	n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.3 ) 
-	print('4', single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period3 and \
-	n_and_3_pulse_width_after_pulse_in_period3 < single_result['n_and_3_pulse_width']*1.3 )
+	print('2', single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period1 and \
+	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.1 )
+	print('3', single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period2 and \
+	n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.1 ) 
+	print('4', single_result['n_and_3_pulse_width']*0.9 < n_and_3_pulse_width_after_pulse_in_period3 and \
+	n_and_3_pulse_width_after_pulse_in_period3 < single_result['n_and_3_pulse_width']*1.1 )
 	print('5', VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_in_period1'] and \
 	single_result['n_and_3_max_vol_after_pulse_in_period1'] < VDD*1.1 ) 
 	print('6', VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_in_period2'] and \
 	single_result['n_and_3_max_vol_after_pulse_in_period2'] < VDD*1.1 )
 	print('7', VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_in_period3'] and \
 	single_result['n_and_3_max_vol_after_pulse_in_period3'] < VDD*1.1 )
-	print('8', single_result['cd_3_pulse_width']*0.7 < cd_3_pulse_width_after_pulse_in_period1 and \
-	cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width']*1.3 )
-	print('9', single_result['cd_3_rise_timing_after_pulse_1'] <= single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] )
-	print('10', single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse_in_period1 and \
-	cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width']*1.3 )
-	print('11', single_result['cd_4_rise_timing_after_pulse_1'] <= single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] )
+	print('8', single_result['cd_3_pulse_width']*0.7 < cd_3_pulse_width_after_pulse and \
+	cd_3_pulse_width_after_pulse < single_result['cd_3_pulse_width']*1.3 )
+	print('9', single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] )
+	print('10', single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse and \
+	cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width']*1.3 )
+	print('11', single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] )
+	print('12', single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 or \
+	single_result['n_nand_4_max_vol_after_pulse'] < VDD*0.5)
 	#'''	
 
 	#关于 n_and_3, cd_3, cd_4, n_nand_3, n_nand_4 的判断
@@ -99,15 +101,19 @@ def is_Normal(single_result):
 	single_result['n_and_3_max_vol_after_pulse_in_period2'] < VDD*1.1 ) and \
 	(VDD*0.9 < single_result['n_and_3_max_vol_after_pulse_in_period3'] and \
 	single_result['n_and_3_max_vol_after_pulse_in_period3'] < VDD*1.1 ) and \
-	(single_result['cd_3_pulse_width']*0.7 < cd_3_pulse_width_after_pulse_in_period1 and \
-	cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width']*1.3 ) and \
-	(single_result['cd_3_rise_timing_after_pulse_1'] <= single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] ) and \
-	(single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse_in_period1 and \
-	cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width']*1.3 ) and \
-	(single_result['cd_4_rise_timing_after_pulse_1'] <= single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ):
+	(single_result['cd_3_pulse_width']*0.7 < cd_3_pulse_width_after_pulse and \
+	cd_3_pulse_width_after_pulse < single_result['cd_3_pulse_width']*1.3 ) and \
+	(single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] ) and \
+	(single_result['cd_4_pulse_width']*0.7 < cd_4_pulse_width_after_pulse and \
+	cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width']*1.3 ) and \
+	(single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ):
 		return(True)
-	else:
-		return(False)
+	'''
+	# and \
+	(single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 or \
+	single_result['n_nand_4_max_vol_after_pulse'] < VDD*0.5):
+		#return(True)
+	'''
 
 def is_DeadlocK(single_result):
 	#判断是否发生 deadlock 现象, 在注入 error pulse 之后, 没有出现第三个波的情况视为 deadlock
@@ -120,7 +126,7 @@ def is_11_error(single_result):
 	#在 normal operation 的情况下, n_nand_3 和 n_nand_4的输出为1
 	#设置阈值为vdd*0.5的根据在Evernote笔记中有所记录
 	
-	'''
+	#'''
 	print('is 11 error')
 	print('1', single_result['n_and_3_max_vol_after_pulse_in_period1'] > VDD*0.5 )
 	print('2', single_result['n_nand_3_max_vol_after_pulse'] > VDD*0.5 )
@@ -132,37 +138,29 @@ def is_11_error(single_result):
 	single_result['n_nand_4_max_vol_after_pulse'] > VDD*0.5:
 		return(True)
 
-def is_Wrong_Output(single_result):
+def is_wrong_output(single_result):
 	#在cd信号正常的情况下(cd_3和cd_4波形正常)，应该有输出的n_and_3 和 n_and_4 为0, 且n_nand_3 和 n_nand_4 的输出为1, 则视为发生了出力的反转
 	#cd信号正常:在injection timing+period之内rise, 且pulse width正常
 	#波形特征 : n_and_3和 n_and_4的第一次 rise_timing 不在 injection timing+period 范围之内
  	#而 n_nand_3和 n_nand_4在 injection timing+period 范围内有波峰 
 
-
-	#确定 n_and_3 的 pulse_width
-	if single_result['n_and_3_pulse_width_after_pulse_in_period1_1'] > 0:
-		n_and_3_pulse_width_after_pulse_in_period1 = single_result['n_and_3_pulse_width_after_pulse_in_period1_1']
-	else:
-		n_and_3_pulse_width_after_pulse_in_period1 = single_result['n_and_3_pulse_width_after_pulse_in_period1_2']
-
-	#确定 cd_3 的 pulse_width
+	#确定 CD_3 的 pulse_width
 	if single_result['cd_3_pulse_width_after_pulse_in_period1_1'] > 0:
 		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_1']
 	else:
 		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_2']
 
-	#确定 cd_4 的 pulse_width
-	if single_result['cd_4_pulse_width_after_pulse_in_period1_1'] > 0:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_1']
+	#确定 CD_4 的 pulse_width
+	if single_result['cd_4_pulse_width_after_pulse_1'] > 0:
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_1']
 	else:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_2']
+		cd_4_pulse_width_after_pulse = single_result['cd_4_pulse_width_after_pulse_2']
 
-	'''
-	print('is_Wrong_Output')
+	#'''
 	print('1', single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] )
-	print('2', cd_3_pulse_width_after_pulse_in_period1 > single_result['cd_3_pulse_width'] * 0.7 and cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width'] * 1.3 ) 
+	print('2', cd_3_pulse_width_after_pulse > single_result['cd_3_pulse_width'] * 0.7 and cd_3_pulse_width_after_pulse < single_result['cd_3_pulse_width'] * 1.3 ) 
 	print('3', single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ) 
-	print('4', cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 )
+	print('4', cd_4_pulse_width_after_pulse > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width'] * 1.3 )
 	print('5', not ( ( single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
 	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
 	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 ) and \
@@ -172,47 +170,17 @@ def is_Wrong_Output(single_result):
 
 	#关于cd_3, cd_4, n_and_3 的判断
 	if ( (single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] ) and \
-	(single_result['cd_3_pulse_width'] * 0.7 < cd_3_pulse_width_after_pulse_in_period1 and cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width'] * 1.3 ) and \
+	(cd_3_pulse_width_after_pulse > single_result['cd_3_pulse_width'] * 0.7 and cd_3_pulse_width_after_pulse < single_result['cd_3_pulse_width'] * 1.3 ) and \
 	(single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ) and \
-	(cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 ) and \
-	not ( ( single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
+	(cd_4_pulse_width_after_pulse > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse < single_result['cd_4_pulse_width'] * 1.3 ) and \
+	not ( single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
 	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
 	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 ) and \
-	single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 ) ):
-		print('True')
+	single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 ):
 		return(True)
 	else:
 		return(False)	
 
-def is_Wrong_CD(single_result):
-
-	#确定 cd_3 的 pulse_width
-	if single_result['cd_3_pulse_width_after_pulse_in_period1_1'] > 0:
-		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_1']
-	else:
-		cd_3_pulse_width_after_pulse_in_period1 = single_result['cd_3_pulse_width_after_pulse_in_period1_2']
-
-	#确定 cd_4 的 pulse_width
-	if single_result['cd_4_pulse_width_after_pulse_in_period1_1'] > 0:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_1']
-	else:
-		cd_4_pulse_width_after_pulse_in_period1 = single_result['cd_4_pulse_width_after_pulse_in_period1_2']
-
-	#'''
-	print('is Wrong CD')
-	print('1', single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] )
-	print('2', single_result['cd_3_pulse_width'] * 0.7 < cd_3_pulse_width_after_pulse_in_period1 and cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width'] * 1.3 )
-	print('3', single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] )
-	print('4', cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 )
-	#'''
-
-	if not ( (single_result['cd_3_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_3_period'] ) and \
-	(single_result['cd_3_pulse_width'] * 0.7 < cd_3_pulse_width_after_pulse_in_period1 and cd_3_pulse_width_after_pulse_in_period1 < single_result['cd_3_pulse_width'] * 1.3 ) and \
-	(single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ) and \
-	(cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 )  ):
-		return(True)
-	else:
-		return(False)	
 
 def hspice_simulation(start_timing, end_timing, current_height, injection_node, output_node, input_file):
 
@@ -308,10 +276,8 @@ def analyze_waveform(lis_file):
 			return('normal')
 	elif is_DeadlocK(single_result_dict):
 		return('deadlock')
-	elif is_Wrong_Output(single_result_dict):
+	elif is_wrong_output(single_result_dict):
 		return('wrong output')
-	elif is_Wrong_CD(single_result_dict):
-		return('wrong cd')
 	else:
 		return('unknown')
 
@@ -358,7 +324,7 @@ for line in CSV_file:
 print('input_data')
 print(input_data)
 
-#'''
+'''
 #进行模拟之前, 清空 input_file 和 output_file 文件夹中的所有文件
 for file in glob.glob('./input_file/*'):
 	os.remove(file)
@@ -366,7 +332,7 @@ for file in glob.glob('./output_file/*'):
 	os.remove(file)
 #'''
 
-#'''
+'''
 ########## 进行 hspice simulation ##########
 for data in input_data:
 	hspice_simulation(data[0], data[1], data[2], data[3], data[4], input_file)
@@ -410,7 +376,6 @@ for data in input_data:
 	number_of_normal = 0
 	number_of_11_error = 0
 	number_of_wrong_output = 0
-	number_of_wrong_cd = 0
 	number_of_unknown = 0
 
 	for part in injection_node_result:
@@ -423,8 +388,6 @@ for data in input_data:
 			number_of_11_error += 1
 		elif single_result[1].strip('\n') == 'wrong output':
 			number_of_wrong_output += 1
-		elif single_result[1].strip('\n') == 'wrong cd':
-			number_of_wrong_cd += 1
 		else:
 			number_of_unknown += 1	
 
@@ -434,7 +397,6 @@ for data in input_data:
 	result_file.write('number of deadlock : %s \n' %number_of_deadlock)
 	result_file.write('number of 11 error : %s \n' %number_of_11_error)
 	result_file.write('number of wrong output: %s \n' %number_of_wrong_output)
-	result_file.write('number of wrong cd: %s \n' %number_of_wrong_cd)
 	result_file.write('number of unknown : %s \n\n' %number_of_unknown)
 
 

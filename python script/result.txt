@@ -1,7 +1,7 @@
 
 
 Data Analysis
-injection node : i70  injection timing : 100--102ns
+injection node : n1  injection timing : 100--102ns
 number of simulation : 0 
 number of normal : 0 
 number of deadlock : 0 
@@ -9,4 +9,12 @@ number of 11 error : 0
 number of wrong output: 0 
 number of unknown : 0 
 
-time used(s) : 0.0131390094757
+injection node : n2  injection timing : 100--101ns
+number of simulation : 0 
+number of normal : 0 
+number of deadlock : 0 
+number of 11 error : 0 
+number of wrong output: 0 
+number of unknown : 0 
+
+time used(s) : 0.0180230140686

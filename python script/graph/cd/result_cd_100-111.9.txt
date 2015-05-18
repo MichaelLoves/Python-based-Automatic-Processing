@@ -1,0 +1,131 @@
+./output_file/cd_101.0.lis   deadlock
+./output_file/cd_101.1.lis   deadlock
+./output_file/cd_101.2.lis   deadlock
+./output_file/cd_101.3.lis   deadlock
+./output_file/cd_101.4.lis   deadlock
+./output_file/cd_101.5.lis   wrong cd
+./output_file/cd_101.6.lis   wrong cd
+./output_file/cd_101.7.lis   wrong cd
+./output_file/cd_101.8.lis   wrong cd
+./output_file/cd_101.9.lis   normal
+./output_file/cd_102.0.lis   normal
+./output_file/cd_102.1.lis   normal
+./output_file/cd_102.2.lis   normal
+./output_file/cd_102.3.lis   normal
+./output_file/cd_102.4.lis   normal
+./output_file/cd_102.5.lis   normal
+./output_file/cd_102.6.lis   normal
+./output_file/cd_102.7.lis   normal
+./output_file/cd_102.8.lis   normal
+./output_file/cd_102.9.lis   normal
+./output_file/cd_103.0.lis   normal
+./output_file/cd_103.1.lis   normal
+./output_file/cd_103.2.lis   normal
+./output_file/cd_103.3.lis   normal
+./output_file/cd_103.4.lis   normal
+./output_file/cd_103.5.lis   normal
+./output_file/cd_103.6.lis   normal
+./output_file/cd_103.7.lis   normal
+./output_file/cd_103.8.lis   normal
+./output_file/cd_103.9.lis   normal
+./output_file/cd_104.0.lis   normal
+./output_file/cd_104.1.lis   normal
+./output_file/cd_104.2.lis   normal
+./output_file/cd_104.3.lis   normal
+./output_file/cd_104.4.lis   normal
+./output_file/cd_104.5.lis   normal
+./output_file/cd_104.6.lis   normal
+./output_file/cd_104.7.lis   normal
+./output_file/cd_104.8.lis   normal
+./output_file/cd_104.9.lis   normal
+./output_file/cd_105.0.lis   normal
+./output_file/cd_105.1.lis   normal
+./output_file/cd_105.2.lis   normal
+./output_file/cd_105.3.lis   normal
+./output_file/cd_105.4.lis   normal
+./output_file/cd_105.5.lis   normal
+./output_file/cd_105.6.lis   normal
+./output_file/cd_105.7.lis   normal
+./output_file/cd_105.8.lis   normal
+./output_file/cd_105.9.lis   normal
+./output_file/cd_106.0.lis   normal
+./output_file/cd_106.1.lis   normal
+./output_file/cd_106.2.lis   normal
+./output_file/cd_106.3.lis   normal
+./output_file/cd_106.4.lis   normal
+./output_file/cd_106.5.lis   normal
+./output_file/cd_106.6.lis   normal
+./output_file/cd_106.7.lis   normal
+./output_file/cd_106.8.lis   normal
+./output_file/cd_106.9.lis   normal
+./output_file/cd_107.0.lis   normal
+./output_file/cd_107.1.lis   normal
+./output_file/cd_107.2.lis   normal
+./output_file/cd_107.3.lis   normal
+./output_file/cd_107.4.lis   normal
+./output_file/cd_107.5.lis   normal
+./output_file/cd_107.6.lis   normal
+./output_file/cd_107.7.lis   normal
+./output_file/cd_107.8.lis   normal
+./output_file/cd_107.9.lis   normal
+./output_file/cd_108.0.lis   normal
+./output_file/cd_108.1.lis   normal
+./output_file/cd_108.2.lis   normal
+./output_file/cd_108.3.lis   normal
+./output_file/cd_108.4.lis   normal
+./output_file/cd_108.5.lis   normal
+./output_file/cd_108.6.lis   deadlock
+./output_file/cd_108.7.lis   deadlock
+./output_file/cd_108.8.lis   deadlock
+./output_file/cd_108.9.lis   deadlock
+./output_file/cd_109.0.lis   deadlock
+./output_file/cd_109.1.lis   deadlock
+./output_file/cd_109.2.lis   deadlock
+./output_file/cd_109.3.lis   deadlock
+./output_file/cd_109.4.lis   deadlock
+./output_file/cd_109.5.lis   deadlock
+./output_file/cd_109.6.lis   deadlock
+./output_file/cd_109.7.lis   deadlock
+./output_file/cd_109.8.lis   deadlock
+./output_file/cd_109.9.lis   deadlock
+./output_file/cd_110.0.lis   deadlock
+./output_file/cd_110.1.lis   deadlock
+./output_file/cd_110.2.lis   deadlock
+./output_file/cd_110.3.lis   deadlock
+./output_file/cd_110.4.lis   deadlock
+./output_file/cd_110.5.lis   deadlock
+./output_file/cd_110.6.lis   deadlock
+./output_file/cd_110.7.lis   deadlock
+./output_file/cd_110.8.lis   deadlock
+./output_file/cd_110.9.lis   deadlock
+./output_file/cd_111.0.lis   deadlock
+./output_file/cd_111.1.lis   deadlock
+./output_file/cd_111.2.lis   deadlock
+./output_file/cd_111.3.lis   deadlock
+./output_file/cd_111.4.lis   deadlock
+./output_file/cd_111.5.lis   deadlock
+./output_file/cd_111.6.lis   deadlock
+./output_file/cd_111.7.lis   deadlock
+./output_file/cd_111.8.lis   deadlock
+./output_file/cd_111.9.lis   deadlock
+./output_file/cd_112.0.lis   deadlock
+./output_file/cd_112.1.lis   deadlock
+./output_file/cd_112.2.lis   deadlock
+./output_file/cd_112.3.lis   deadlock
+./output_file/cd_112.4.lis   deadlock
+./output_file/cd_112.5.lis   deadlock
+./output_file/cd_112.6.lis   deadlock
+./output_file/cd_112.7.lis   deadlock
+./output_file/cd_112.8.lis   deadlock
+./output_file/cd_112.9.lis   deadlock
+
+
+Data Analysis
+injection node : n9  injection timing : 100--111.9ns
+number of simulation : 120 
+number of normal : 59 
+number of deadlock : 47 
+number of 11 error : 8 
+number of wrong output: 6 
+number of wrong cd: 0 
+number of unknown : 0 
