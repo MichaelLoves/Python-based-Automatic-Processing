@@ -87,8 +87,6 @@ def is_Normal(single_result):
 
 	#关于 n_and_3, cd_3, cd_4, n_nand_3, n_nand_4 的判断
 	if ( single_result['n_and_3_rise_timing_1'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] ) and \
-	( single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
-	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 ) and \
 	( single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period2 and \
 	n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.3 ) and \
 	( single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period3 and \
@@ -139,11 +137,11 @@ def is_Wrong_Output(single_result):
  	#而 n_nand_3和 n_nand_4在 injection timing+period 范围内有波峰 
 
 
-	#确定 n_and_3 的 pulse_width
-	if single_result['n_and_3_pulse_width_after_pulse_in_period1_1'] > 0:
-		n_and_3_pulse_width_after_pulse_in_period1 = single_result['n_and_3_pulse_width_after_pulse_in_period1_1']
+	#确定 n_and_3 在 injection timing 之后第二个周期内的 pulse_width
+	if single_result['n_and_3_pulse_width_after_pulse_in_period2_1'] > 0:
+		n_and_3_pulse_width_after_pulse_in_period2 = single_result['n_and_3_pulse_width_after_pulse_in_period2_1']
 	else:
-		n_and_3_pulse_width_after_pulse_in_period1 = single_result['n_and_3_pulse_width_after_pulse_in_period1_2']
+		n_and_3_pulse_width_after_pulse_in_period2 = single_result['n_and_3_pulse_width_after_pulse_in_period:_2']
 
 	#确定 cd_3 的 pulse_width
 	if single_result['cd_3_pulse_width_after_pulse_in_period1_1'] > 0:
@@ -164,8 +162,8 @@ def is_Wrong_Output(single_result):
 	print('3', single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ) 
 	print('4', cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 )
 	print('5', not ( ( single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
-	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
-	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 ) and \
+	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period2 and \
+	n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.3 ) and \
 	single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 ) )
 	print()
 	#'''
@@ -176,13 +174,14 @@ def is_Wrong_Output(single_result):
 	(single_result['cd_4_rise_timing_after_pulse_1'] < single_result['error_pulse_injection_timing'] + single_result['cd_4_period'] ) and \
 	(cd_4_pulse_width_after_pulse_in_period1 > single_result['cd_4_pulse_width'] * 0.7 and cd_4_pulse_width_after_pulse_in_period1 < single_result['cd_4_pulse_width'] * 1.3 ) and \
 	not ( ( single_result['n_and_3_rise_to_vdd_timing_after_pulse'] < single_result['error_pulse_injection_timing'] + single_result['n_and_3_period'] and \
-	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period1 and \
-	n_and_3_pulse_width_after_pulse_in_period1 < single_result['n_and_3_pulse_width']*1.3 ) and \
+	single_result['n_and_3_pulse_width']*0.7 < n_and_3_pulse_width_after_pulse_in_period2 and n_and_3_pulse_width_after_pulse_in_period2 < single_result['n_and_3_pulse_width']*1.3 ) and \
 	single_result['n_nand_3_max_vol_after_pulse'] < VDD*0.5 ) ):
 		print('True')
 		return(True)
 	else:
 		return(False)	
+
+
 
 def is_Wrong_CD(single_result):
 
@@ -358,7 +357,7 @@ for line in CSV_file:
 print('input_data')
 print(input_data)
 
-#'''
+'''
 #进行模拟之前, 清空 input_file 和 output_file 文件夹中的所有文件
 for file in glob.glob('./input_file/*'):
 	os.remove(file)
@@ -366,7 +365,7 @@ for file in glob.glob('./output_file/*'):
 	os.remove(file)
 #'''
 
-#'''
+'''
 ########## 进行 hspice simulation ##########
 for data in input_data:
 	hspice_simulation(data[0], data[1], data[2], data[3], data[4], input_file)
